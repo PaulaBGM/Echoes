@@ -272,14 +272,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ebff821de8fd942bc9bc316970e1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 3
+  normalSpeed: 4
   currentSpeed: 0
-  runSpeed: 5
+  runSpeed: 7
   stickToGroundSpeed: -3
   jumpForce: 5
   jumpRayDistance: 3
   dashDuration: 1
-  dashSpeed: 7
+  dashSpeed: 10
   dashEndSpeed: 1
 --- !u!1 &330585543
 GameObject:
@@ -369,7 +369,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.18, y: 0.88, z: -3.21}
+  m_LocalPosition: {x: 0.2, y: 0.88, z: -3.8400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -636,7 +636,7 @@ Transform:
   m_GameObject: {fileID: 640182089}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.18, y: 0.88, z: -3.21}
+  m_LocalPosition: {x: 0.2, y: 0.88, z: -3.8400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -668,7 +668,7 @@ Transform:
   m_GameObject: {fileID: 683582785}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.18, y: 0.48, z: -1.21}
+  m_LocalPosition: {x: 0.2, y: 0.48, z: -1.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
