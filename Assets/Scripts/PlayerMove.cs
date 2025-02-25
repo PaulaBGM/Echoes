@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
             UpdatePlayerVelocity();
             Jump();
             ApplyVelocity();
-            if (Input.GetKeyDown(KeyCode.LeftAlt)) StartDash();
+            if (Input.GetKeyDown(KeyCode.C)) StartDash();
         }
     }
     void ApplyVelocity()
