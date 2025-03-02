@@ -7467,6 +7467,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3191008294271992501}
   - component: {fileID: 8024397058836931027}
+  - component: {fileID: 7654925506364336869}
+  - component: {fileID: 1117382017580987197}
   m_Layer: 0
   m_Name: Ava
   m_TagString: Untagged
@@ -7517,6 +7519,53 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!143 &7654925506364336869
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3439058729036106583}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.19
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.97, z: 0}
+--- !u!114 &1117382017580987197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3439058729036106583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ebff821de8fd942bc9bc316970e1e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalSpeed: 3
+  currentSpeed: 0
+  runSpeed: 5
+  stickToGroundSpeed: -3
+  jumpForce: 5
+  jumpRayDistance: 3
+  dashDuration: 1
+  dashSpeed: 7
+  dashEndSpeed: 1
 --- !u!1 &3452961855154680865
 GameObject:
   m_ObjectHideFlags: 0
