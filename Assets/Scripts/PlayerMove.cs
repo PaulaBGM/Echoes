@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private CharacterController ch_Controller;
+    private Animator animator;
     private float gravity = -9.8f;
 
     [Header("Movement")]
@@ -32,15 +33,17 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float dashEndSpeed = 1f;
     private Vector3 dashDirection;
 
-    /*//Variables de números enteros
+    //Variables de números enteros
     private static readonly int ZSpeed = Animator.StringToHash("zSpeed");
     private static readonly int XSpeed = Animator.StringToHash("xSpeed");
     private static readonly int Crouched = Animator.StringToHash("crouched");
-    */
+
     void Start()
     {
         ch_Controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
+
 
     void Update()
     {
@@ -72,36 +75,53 @@ public class PlayerMove : MonoBehaviour
         {
             vectorInput.Normalize();
         }
+
         //Interpolar para caminar y correr.
         float targetSpeed = Input.GetKey(KeyCode.LeftShift) && !isCrouched ? runSpeed : normalSpeed; //Si presiona Shift y no está agachado se usa la velocidad para correr sino usa la velociad normal.
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * 5); //Suaviza el cambio de velocidad gradualmente.
+        
         Vector3 localPlayerVelocity = new Vector3(xInput * currentSpeed, 0, zInput * currentSpeed);
         playerVelocity = transform.TransformVector(localPlayerVelocity);
         Debug.Log(localPlayerVelocity);
+
+        //Llamar a las animaciones pasándole la velocidad de movimiento en cada eje.
+        animator.SetFloat(ZSpeed, localPlayerVelocity.z);
+        animator.SetFloat(XSpeed, localPlayerVelocity.x);
     }
 
-    void Jump() 
+    void Jump()
     {
-        //si se pone el slide, añadir condicion en el if
-        if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping) 
+        if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping)
         {
             isJumping = true;
-            //endJump = false;
-            verticalVelocity = jumpForce;
+            verticalVelocity = jumpForce; // Aplicamos la fuerza de salto
+            StartCoroutine(JumpCoroutine()); // Iniciamos la corrutina de animación
         }
 
-        //if (endJump && verticalVelocity < 0 && ch_Controller.isGrounded)
-        if (verticalVelocity < 0 && ch_Controller.isGrounded) 
+        if (verticalVelocity < 0 && ch_Controller.isGrounded)
         {
-            Debug.Log("fin salto");
-            isJumping= false;
-            verticalVelocity = stickToGroundSpeed;
+            Debug.Log("Fin del salto");
+            isJumping = false;
+            verticalVelocity = stickToGroundSpeed; // Asegura que el personaje se mantenga pegado al suelo
         }
 
-
-        //poner animacion de fin de salto
-        verticalVelocity += gravity * Time.deltaTime;
+        verticalVelocity += gravity * Time.deltaTime; // Aplica la gravedad al personaje
     }
+
+    IEnumerator JumpCoroutine()
+    {
+        animator.SetInteger("jump", 1); // Activa la animación de salto
+        yield return new WaitForSeconds(0.2f); // Espera un poco para sincronizar con la animación
+
+        // Espera hasta que el personaje deje de estar en el aire
+        while (!ch_Controller.isGrounded)
+        {
+            yield return null;
+        }
+
+        animator.SetInteger("jump", 2); // Desactiva la animación al aterrizar
+    }
+
 
     void StartDash()
     {
@@ -119,5 +139,4 @@ public class PlayerMove : MonoBehaviour
         ch_Controller.Move(dashDirection * dashSpeed * Time.deltaTime); // Movemos al jugador en la dirección del dash
         if (dashTime >= dashDuration) isDashing = false; // Terminamos el dash cuando se cumple el tiempo
     }
-
 }
