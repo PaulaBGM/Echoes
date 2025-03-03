@@ -106,13 +106,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.19
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.99, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1648265977509871230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +130,12 @@ MonoBehaviour:
   runSpeed: 5
   stickToGroundSpeed: -3
   jumpForce: 5
-  jumpRayDistance: 3
+  crouchSpeed: 1
+  standHeight: 1.8
+  crouchHeight: 0.8
+  crouchCenter: 0.4
+  standCenter: 1
+  longIdleTime: 15
   dashDuration: 1
   dashSpeed: 7
   dashEndSpeed: 1

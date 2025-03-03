@@ -57,6 +57,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Grounded: " + ch_Controller.isGrounded);
+
         if (isDashing)
         {
             HandleDash();
@@ -77,6 +79,8 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C)) StartDash();
 
         LongIdle(); // Llamada a la función después de manejar el movimiento
+
+        verticalVelocity = stickToGroundSpeed;
     }
 
     void LongIdle()
@@ -146,7 +150,6 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 localPlayerVelocity = new Vector3(xInput * currentSpeed, 0, zInput * currentSpeed);
         playerVelocity = transform.TransformVector(localPlayerVelocity);
-        Debug.Log(localPlayerVelocity);
 
         //Llamar a las animaciones pasándole la velocidad de movimiento en cada eje.
         animator.SetFloat(ZSpeed, localPlayerVelocity.z);
@@ -217,7 +220,15 @@ public class PlayerMove : MonoBehaviour
         ch_Controller.center = new Vector3(0, standCenter, 0);
         animator.SetInteger(Crouched, 2);
         isCrouched = false;
+        StartCoroutine(ResetCrouchState());
     }
+
+    IEnumerator ResetCrouchState()
+    {
+        yield return new WaitForSeconds(1.5f);
+        animator.SetInteger(Crouched, 0);
+    }
+
     void StartDash()
     {
         isDashing = true; // Activamos el estado de dash
@@ -231,6 +242,7 @@ public class PlayerMove : MonoBehaviour
     void HandleDash()
     {
         dashTime += Time.deltaTime; // Aumentamos el tiempo transcurrido en el dash
+        animator.SetFloat(ZSpeed, dashSpeed);
         ch_Controller.Move(dashDirection * dashSpeed * Time.deltaTime); // Movemos al jugador en la dirección del dash
         if (dashTime >= dashDuration) isDashing = false; // Terminamos el dash cuando se cumple el tiempo
     }
