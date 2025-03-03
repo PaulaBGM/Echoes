@@ -215,7 +215,7 @@ public class PlayerMove : MonoBehaviour
     {
         ch_Controller.height = standHeight;
         ch_Controller.center = new Vector3(0, standCenter, 0);
-        animator.SetInteger(Crouched, 0);
+        animator.SetInteger(Crouched, 2);
         isCrouched = false;
     }
     void StartDash()
