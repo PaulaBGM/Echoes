@@ -16,15 +16,25 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float jumpRayDistance = 3f;
+
+    [Header("Crouched")]
+    [SerializeField] private float crouchSpeed = 1f;
+    [SerializeField] private float standHeight = 2f; // Altura de la cápsula cuando está de pie.
+    [SerializeField] private float crouchHeight = 0.8f; // Altura de la cápsula cuando está agachado.
+    [SerializeField] private float crouchCenter = 0.4f; // Centro de la cápsula cuando está agachado.
+    [SerializeField] private float standCenter = 0.5f; // Centro de la cápsula cuando está de pie.
+
+    [Header("LongIdle")]
+    [SerializeField] private float longIdleTime = 15f;
+    private float longIdleTimer = 0f;
 
     private Vector3 playerVelocity;
     private float verticalVelocity;
     private bool isJumping;
-    private bool endJump = true;
 
     private bool isCrouched = false;
-    
+    private bool tryingToStand = false;
+
     [Header("Dash")]
     private bool isDashing = false;
     private float dashTime;
@@ -47,21 +57,68 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (isDashing) HandleDash();
-        else
+        if (isDashing)
         {
-            UpdatePlayerVelocity();
-            Jump();
-            ApplyVelocity();
-            if (Input.GetKeyDown(KeyCode.C)) StartDash();
+            HandleDash();
+            return;
+        }
+
+        UpdatePlayerVelocity();
+        Jump();
+        ApplyVelocity();
+
+        HandleCrouch();
+
+        if (tryingToStand)
+        {
+            TryStandUp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C)) StartDash();
+
+        LongIdle(); // Llamada a la función después de manejar el movimiento
+    }
+
+    void LongIdle()
+    {
+        // Si el jugador está en movimiento, reiniciamos el temporizador
+        if (playerVelocity.sqrMagnitude > 0.01f || isJumping || isDashing)
+        {
+            longIdleTimer = 0f;
+            animator.SetBool("longIdle", false);
+            animator.SetBool("movement", true);
+            return;
+        }
+
+        // Si el jugador no se ha movido, aumentamos el temporizador
+        longIdleTimer += Time.deltaTime;
+
+        if (longIdleTimer > longIdleTime)
+        {
+            animator.SetBool("longIdle", true);
+            animator.SetBool("movement", false);
         }
     }
+
     void ApplyVelocity()
     {
         Vector3 totalVelocity = playerVelocity + verticalVelocity * Vector3.up;
          
-            ch_Controller.Move(totalVelocity * Time.deltaTime); 
-        
+        ch_Controller.Move(totalVelocity * Time.deltaTime); 
+    }
+
+    void HandleCrouch()
+    {
+        // Si se mantiene presionada la tecla LeftControl, se agacha
+        if (Input.GetKey(KeyCode.LeftControl) && !isCrouched)
+        {
+            StartCrouch();
+        }
+        // Levantarse si se suelta la tecla
+        else if (Input.GetKeyUp(KeyCode.LeftControl) && isCrouched)
+        {
+            tryingToStand = true;
+        }
     }
 
     void UpdatePlayerVelocity() 
@@ -76,10 +133,17 @@ public class PlayerMove : MonoBehaviour
             vectorInput.Normalize();
         }
 
-        //Interpolar para caminar y correr.
-        float targetSpeed = Input.GetKey(KeyCode.LeftShift) && !isCrouched ? runSpeed : normalSpeed; //Si presiona Shift y no está agachado se usa la velocidad para correr sino usa la velociad normal.
-        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * 5); //Suaviza el cambio de velocidad gradualmente.
-        
+        if (isCrouched)
+        {
+            currentSpeed = crouchSpeed;
+        }
+        else
+        {
+            //Interpolar para caminar y correr.
+            float targetSpeed = Input.GetKey(KeyCode.LeftShift) && !isCrouched ? runSpeed : normalSpeed; //Si presiona Shift y no está agachado se usa la velocidad para correr sino usa la velociad normal.
+            currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * 5); //Suaviza el cambio de velocidad gradualmente.
+        }
+
         Vector3 localPlayerVelocity = new Vector3(xInput * currentSpeed, 0, zInput * currentSpeed);
         playerVelocity = transform.TransformVector(localPlayerVelocity);
         Debug.Log(localPlayerVelocity);
@@ -94,9 +158,12 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping)
         {
             isJumping = true;
-            verticalVelocity = jumpForce; // Aplicamos la fuerza de salto
+            animator.SetInteger("jump", 1); // Activa la animación de salto
             StartCoroutine(JumpCoroutine()); // Iniciamos la corrutina de animación
         }
+
+        verticalVelocity += gravity * Time.deltaTime; // Aplica la gravedad al personaje
+
 
         if (verticalVelocity < 0 && ch_Controller.isGrounded)
         {
@@ -104,25 +171,53 @@ public class PlayerMove : MonoBehaviour
             isJumping = false;
             verticalVelocity = stickToGroundSpeed; // Asegura que el personaje se mantenga pegado al suelo
         }
-
-        verticalVelocity += gravity * Time.deltaTime; // Aplica la gravedad al personaje
     }
 
     IEnumerator JumpCoroutine()
     {
-        animator.SetInteger("jump", 1); // Activa la animación de salto
-        yield return new WaitForSeconds(0.2f); // Espera un poco para sincronizar con la animación
-
-        // Espera hasta que el personaje deje de estar en el aire
-        while (!ch_Controller.isGrounded)
-        {
-            yield return null;
-        }
-
-        animator.SetInteger("jump", 2); // Desactiva la animación al aterrizar
+        yield return new WaitForSeconds(0.5f); // Espera un poco para sincronizar con la animación
+        verticalVelocity = jumpForce; // Aplicamos la fuerza de salto
+        StartCoroutine(EndJumpCoroutine());
     }
 
+    IEnumerator EndJumpCoroutine()
+    {
+        yield return new WaitForSeconds(1.5f); // Espera un poco para sincronizar con la animación
+        animator.SetInteger("jump", 0); // Activa la animación de salto
+    }
 
+    void StartCrouch()
+    {
+        isCrouched = true;
+        ch_Controller.height = crouchHeight;
+        ch_Controller.center = new Vector3(0, crouchCenter, 0);
+        animator.SetInteger(Crouched, 1);
+        tryingToStand = false;
+    }
+
+    void TryStandUp()
+    {
+        if (CanStandUp())
+        {
+            StandUp();
+            tryingToStand = false;
+        }
+    }
+
+    private bool CanStandUp()
+    {
+        RaycastHit hitInfo;
+
+        return !Physics.SphereCast(transform.position + ch_Controller.center, ch_Controller.radius, Vector3.up, out hitInfo, 2f);
+    }
+
+    void StandUp()
+    {
+        ch_Controller.height = standHeight;
+        ch_Controller.center = new Vector3(0, standCenter, 0);
+        animator.SetInteger(Crouched, 0);
+        isCrouched = false;
+    }
     void StartDash()
     {
         isDashing = true; // Activamos el estado de dash

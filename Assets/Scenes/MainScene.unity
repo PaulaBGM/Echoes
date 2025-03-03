@@ -293,7 +293,7 @@ MonoBehaviour:
   offset: {x: 0, y: 2, z: -4}
   sensitivityX: 100
   sensitivityY: 200
-  minY: -50
+  minY: -30
   maxY: 57.2
 --- !u!1 &332568717
 GameObject:
@@ -571,6 +571,21 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: jumpForce
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: crouchCenter
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: crouchHeight
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4946477747237577140, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -625,6 +640,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ava_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537714209580228842, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

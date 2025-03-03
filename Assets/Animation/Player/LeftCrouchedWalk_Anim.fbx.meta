@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c09d29b7412b77849ae7643b25d88fbe
+guid: cad62f602c56f7d49b204f322b959609
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: LeftRun_Anim
+      name: LeftCrouchedWalk_Anim
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
