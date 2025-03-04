@@ -1,32 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class AimStateManager : MonoBehaviour
 {
-    public float sensitivityX = 100f;
-    public float sensitivityY = 100f;
-
-    private float xRotation = 0f;
-    private float yRotation = 0f;
-
+    public AxisState xAxis, yAxis;
     [SerializeField] private Transform camFollowPos;
 
+    // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
+    // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivityX * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY * Time.deltaTime;
-
-        yRotation += mouseX;
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Limita la rotación vertical
-
-        camFollowPos.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        xAxis.Update(Time.deltaTime);
+        yAxis.Update(Time.deltaTime);
+    }
+    private void LateUpdate()
+    {
+        camFollowPos.localEulerAngles = new Vector3(yAxis.Value, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis.Value, transform.eulerAngles.z);
     }
 }
