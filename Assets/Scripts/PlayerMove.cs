@@ -17,6 +17,9 @@ public class PlayerMove : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float endJumpRaycastDistance = 2f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float endJumpAnimTime = 1.5f;
+    [SerializeField] private float startJumpAnimTime = 0.5f;
 
     [Header("Crouched")]
     [SerializeField] private float crouchSpeed = 1f;
@@ -63,7 +66,8 @@ public class PlayerMove : MonoBehaviour
     {
         Debug.Log("Grounded: " + ch_Controller.isGrounded);
         Debug.Log("Jumping: " + isJumping);
-
+        Debug.Log("EndJump: " + endJump);
+        Debug.Log("Waiting animation: " + waitingForJumpAnim);
 
         if (isDashing)
         {
@@ -85,8 +89,6 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C)) StartDash();
 
         LongIdle(); // Llamada a la función después de manejar el movimiento
-
-        verticalVelocity = stickToGroundSpeed;
     }
 
     void LongIdle()
@@ -164,63 +166,60 @@ public class PlayerMove : MonoBehaviour
 
     void DoJump()
     {
-        // Iniciar salto
-        if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping && !waitingForJumpAnim)
-        {
-            isJumping = true;
-            animator.SetInteger(Jump, 1); // Activa la animación de salto
-            StartCoroutine(JumpCoroutine()); // Iniciamos la corrutina de animación
-        }
-
         // Aplicar gravedad cuando el personaje está en el aire
-        if (!ch_Controller.isGrounded && isJumping)
+        if (!ch_Controller.isGrounded)
         {
             verticalVelocity += gravity * Time.deltaTime; // Aplica la gravedad al personaje
         }
 
-        // Si el personaje está en el suelo y no está saltando, devolverlo al suelo
-        if (verticalVelocity < 0 && ch_Controller.isGrounded && endJump && !waitingForJumpAnim)
+        // Iniciar salto
+        if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping && !waitingForJumpAnim)
         {
-            Debug.Log("Fin del salto");
-            isJumping = false;
-            verticalVelocity = stickToGroundSpeed; // Asegura que el personaje se mantenga pegado al suelo
+            isJumping = true;
+            //endJump = false;
+            waitingForJumpAnim = true;
+            animator.SetInteger(Jump, 1); // Activa la animación de salto
+            StartCoroutine(JumpCoroutine()); // Iniciamos la corrutina de animación
         }
 
-        // Verificar si el personaje aún está en el aire y hacer el Raycast para detectar el aterrizaje
-        if (isJumping && !endJump && verticalVelocity < 0 && !waitingForJumpAnim)
+        /*// Verificar aterrizaje con Raycast
+        Debug.DrawRay(transform.position, Vector3.down * endJumpRaycastDistance, Color.red);
+        if (isJumping && !endJump && !waitingForJumpAnim)
         {
-            Debug.DrawRay(transform.position, Vector3.down * endJumpRaycastDistance, Color.red);
+            Debug.Log("raycast");
 
-            // Si el Raycast detecta el suelo, terminar el salto
-            if (Physics.Raycast(transform.position, Vector3.down, endJumpRaycastDistance))
+            float sphereRadius = 0.3f;
+            if (Physics.SphereCast(transform.position, sphereRadius, Vector3.down, out RaycastHit hit, endJumpRaycastDistance, groundLayer))
             {
+                Debug.Log("SphereCast detectó suelo en: " + hit.collider.gameObject.name);
                 endJump = true;
             }
-        }
+        }*/
 
         // Control de isGrounded solo para el aterrizaje
-        if (ch_Controller.isGrounded && !isJumping && !endJump)
+        if (ch_Controller.isGrounded && !waitingForJumpAnim)
         {
-            // Si el personaje ya aterrizó y no estaba saltando, aplicar el "stick to ground" (pegado al suelo)
+            if (isJumping) Debug.Log("¡Aterrizaje detectado!");
+
+            isJumping = false;
+            //endJump = true;
+            animator.SetInteger(Jump, 0);
             verticalVelocity = stickToGroundSpeed;
         }
     }
 
     IEnumerator JumpCoroutine()
     {
-        waitingForJumpAnim = true;
-        yield return new WaitForSeconds(0.3f); // Espera un poco para sincronizar con la animación
+        yield return new WaitForSeconds(startJumpAnimTime); // Espera un poco para sincronizar con la animación
         verticalVelocity = jumpForce; // Aplicamos la fuerza de salto
         StartCoroutine(EndJumpCoroutine());
     }
 
     IEnumerator EndJumpCoroutine()
     {
-        yield return new WaitForSeconds(1.5f); // Espera un poco para sincronizar con la animación
+        yield return new WaitForSeconds(endJumpAnimTime); // Espera un poco para sincronizar con la animación
         waitingForJumpAnim = false;
-        animator.SetInteger(Jump, 0); // Desactiva la animación de salto
     }
-
 
     void StartCrouch()
     {

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &737575624292032801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5662874750213111843}
+  m_Layer: 0
+  m_Name: CamPosFollow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5662874750213111843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737575624292032801}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.28, y: 1.67, z: -2.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4946477747237577140}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4841319231465522783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,7 +101,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: b07727a928b4c9c4da7cfccee9abe9b1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 10b51542fdcf9e045b4b169b777a6adb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5662874750213111843}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 10b51542fdcf9e045b4b169b777a6adb,
         type: 3}
@@ -85,6 +120,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8772251287208162193}
   m_SourcePrefab: {fileID: 100100000, guid: 10b51542fdcf9e045b4b169b777a6adb, type: 3}
+--- !u!4 &4946477747237577140 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 10b51542fdcf9e045b4b169b777a6adb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4841319231465522783}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5759747549297130254 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 10b51542fdcf9e045b4b169b777a6adb,
@@ -115,7 +156,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1648265977509871230
 MonoBehaviour:
@@ -133,8 +174,13 @@ MonoBehaviour:
   currentSpeed: 0
   runSpeed: 5
   stickToGroundSpeed: -3
-  jumpForce: 10
+  jumpForce: 7
   endJumpRaycastDistance: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  endJumpAnimTime: 1.5
+  startJumpAnimTime: 1
   crouchSpeed: 1
   standHeight: 1.8
   crouchHeight: 0.8
@@ -167,7 +213,7 @@ MonoBehaviour:
     m_InvertInput: 0
     m_MinValue: 180
     m_MaxValue: -180
-    m_Wrap: 1
+    m_Wrap: 0
     m_Recentering:
       m_enabled: 0
       m_WaitTime: 0
@@ -192,4 +238,4 @@ MonoBehaviour:
       m_RecenteringTime: 0
       m_LegacyHeadingDefinition: 0
       m_LegacyVelocityFilterStrength: 0
-  camFollowPos: {fileID: 0}
+  camFollowPos: {fileID: 5662874750213111843}

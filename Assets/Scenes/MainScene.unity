@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 923382360}
   - component: {fileID: 923382359}
   - component: {fileID: 923382358}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,37 +630,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6503095085419145664}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1318718780
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1318718781}
-  m_Layer: 0
-  m_Name: CamPosFollow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1318718781
+--- !u!4 &1318718781 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5662874750213111843, guid: d031a506946b06d409f004193857ab86,
+    type: 3}
+  m_PrefabInstance: {fileID: 6503095085419145664}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318718780}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.28, y: 1.67, z: -2.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 973697045}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1526704632
 GameObject:
   m_ObjectHideFlags: 3
@@ -793,23 +768,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ava_Mesh
       objectReference: {fileID: 0}
-    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
-        type: 3}
-      propertyPath: camFollowPos
-      value: 
-      objectReference: {fileID: 1318718781}
-    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
-        type: 3}
-      propertyPath: xAxis.m_Wrap
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4946477747237577140, guid: d031a506946b06d409f004193857ab86,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1318718781}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d031a506946b06d409f004193857ab86, type: 3}
 --- !u!1660057539 &9223372036854775807

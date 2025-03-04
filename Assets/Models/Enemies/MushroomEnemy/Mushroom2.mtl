@@ -1,0 +1,24 @@
+# Blender 3.6.2 MTL File: 'untitled.blend'
+# www.blender.org
+
+newmtl MatMushroom
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd truffle-man/source/ShroomFinal_MatMushroom_BaseColor.png
+map_Ns truffle-man/source/ShroomFinal_MatMushroom_Roughness.png
+map_refl truffle-man/source/ShroomFinal_MatMushroom_Metallic.png
+
+newmtl MatMushroomBody
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd truffle-man/source/ShroomFinal_MatMushroomBody_BaseColor.png
+map_Ns truffle-man/source/ShroomFinal_MatMushroomBody_Roughness.png
+map_refl truffle-man/source/ShroomFinal_MatMushroomBody_Metallic.png
