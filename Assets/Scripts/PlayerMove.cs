@@ -27,6 +27,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float crouchHeight = 0.8f; // Altura de la cápsula cuando está agachado.
     [SerializeField] private float crouchCenter = 0.4f; // Centro de la cápsula cuando está agachado.
     [SerializeField] private float standCenter = 0.5f; // Centro de la cápsula cuando está de pie.
+    [SerializeField] private float endCrouchAnimTime = 1.5f;
 
     [Header("LongIdle")]
     [SerializeField] private float longIdleTime = 15f;
@@ -64,11 +65,6 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Grounded: " + ch_Controller.isGrounded);
-        Debug.Log("Jumping: " + isJumping);
-        Debug.Log("EndJump: " + endJump);
-        Debug.Log("Waiting animation: " + waitingForJumpAnim);
-
         if (isDashing)
         {
             HandleDash();
@@ -176,33 +172,15 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping && !waitingForJumpAnim)
         {
             isJumping = true;
-            //endJump = false;
             waitingForJumpAnim = true;
             animator.SetInteger(Jump, 1); // Activa la animación de salto
             StartCoroutine(JumpCoroutine()); // Iniciamos la corrutina de animación
         }
 
-        /*// Verificar aterrizaje con Raycast
-        Debug.DrawRay(transform.position, Vector3.down * endJumpRaycastDistance, Color.red);
-        if (isJumping && !endJump && !waitingForJumpAnim)
-        {
-            Debug.Log("raycast");
-
-            float sphereRadius = 0.3f;
-            if (Physics.SphereCast(transform.position, sphereRadius, Vector3.down, out RaycastHit hit, endJumpRaycastDistance, groundLayer))
-            {
-                Debug.Log("SphereCast detectó suelo en: " + hit.collider.gameObject.name);
-                endJump = true;
-            }
-        }*/
-
         // Control de isGrounded solo para el aterrizaje
-        if (ch_Controller.isGrounded && !waitingForJumpAnim)
+        if (ch_Controller.isGrounded && !endJump && !isJumping)
         {
-            if (isJumping) Debug.Log("¡Aterrizaje detectado!");
-
-            isJumping = false;
-            //endJump = true;
+            endJump = true;
             animator.SetInteger(Jump, 0);
             verticalVelocity = stickToGroundSpeed;
         }
@@ -212,12 +190,15 @@ public class PlayerMove : MonoBehaviour
     {
         yield return new WaitForSeconds(startJumpAnimTime); // Espera un poco para sincronizar con la animación
         verticalVelocity = jumpForce; // Aplicamos la fuerza de salto
+        endJump = false;
         StartCoroutine(EndJumpCoroutine());
     }
 
     IEnumerator EndJumpCoroutine()
     {
         yield return new WaitForSeconds(endJumpAnimTime); // Espera un poco para sincronizar con la animación
+        animator.SetInteger(Jump, 2); // Activa la animación de salto
+        isJumping = false;
         waitingForJumpAnim = false;
     }
 
@@ -257,7 +238,7 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator ResetCrouchState()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(endCrouchAnimTime);
         animator.SetInteger(Crouched, 0);
     }
 
