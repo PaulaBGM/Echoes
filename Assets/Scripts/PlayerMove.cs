@@ -16,7 +16,6 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float endJumpRaycastDistance = 2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float endJumpAnimTime = 1.5f;
     [SerializeField] private float startJumpAnimTime = 0.5f;
@@ -87,7 +86,7 @@ public class PlayerMove : MonoBehaviour
         LongIdle(); // Llamada a la función después de manejar el movimiento
     }
 
-    void LongIdle()
+    private void LongIdle()
     {
         // Si el jugador está en movimiento, reiniciamos el temporizador
         if (playerVelocity.sqrMagnitude > 0.01f || isJumping || isDashing || isCrouched)
@@ -108,14 +107,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void ApplyVelocity()
+    private void ApplyVelocity()
     {
         Vector3 totalVelocity = playerVelocity + verticalVelocity * Vector3.up;
          
         ch_Controller.Move(totalVelocity * Time.deltaTime); 
     }
 
-    void HandleCrouch()
+    private void HandleCrouch()
     {
         // Si se mantiene presionada la tecla LeftControl, se agacha
         if (Input.GetKey(KeyCode.LeftControl) && !isCrouched)
@@ -129,7 +128,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void UpdatePlayerVelocity() 
+    private void UpdatePlayerVelocity() 
     {
         //se recogen los input
         float xInput = Input.GetAxis("Horizontal");
@@ -160,7 +159,7 @@ public class PlayerMove : MonoBehaviour
         animator.SetFloat(XSpeed, localPlayerVelocity.x);
     }
 
-    void DoJump()
+    private void DoJump()
     {
         // Aplicar gravedad cuando el personaje está en el aire
         if (!ch_Controller.isGrounded)
@@ -186,7 +185,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    IEnumerator JumpCoroutine()
+    private IEnumerator JumpCoroutine()
     {
         yield return new WaitForSeconds(startJumpAnimTime); // Espera un poco para sincronizar con la animación
         verticalVelocity = jumpForce; // Aplicamos la fuerza de salto
@@ -194,7 +193,7 @@ public class PlayerMove : MonoBehaviour
         StartCoroutine(EndJumpCoroutine());
     }
 
-    IEnumerator EndJumpCoroutine()
+    private IEnumerator EndJumpCoroutine()
     {
         yield return new WaitForSeconds(endJumpAnimTime); // Espera un poco para sincronizar con la animación
         animator.SetInteger(Jump, 2); // Activa la animación de salto
@@ -202,7 +201,7 @@ public class PlayerMove : MonoBehaviour
         waitingForJumpAnim = false;
     }
 
-    void StartCrouch()
+    private void StartCrouch()
     {
         isCrouched = true;
         ch_Controller.height = crouchHeight;
@@ -211,7 +210,7 @@ public class PlayerMove : MonoBehaviour
         tryingToStand = false;
     }
 
-    void TryStandUp()
+    private void TryStandUp()
     {
         if (CanStandUp())
         {
@@ -227,7 +226,7 @@ public class PlayerMove : MonoBehaviour
         return !Physics.SphereCast(transform.position + ch_Controller.center, ch_Controller.radius, Vector3.up, out hitInfo, 2f);
     }
 
-    void StandUp()
+    private void StandUp()
     {
         ch_Controller.height = standHeight;
         ch_Controller.center = new Vector3(0, standCenter, 0);
@@ -236,13 +235,13 @@ public class PlayerMove : MonoBehaviour
         StartCoroutine(ResetCrouchState());
     }
 
-    IEnumerator ResetCrouchState()
+    private IEnumerator ResetCrouchState()
     {
         yield return new WaitForSeconds(endCrouchAnimTime);
         animator.SetInteger(Crouched, 0);
     }
 
-    void StartDash()
+    private void StartDash()
     {
         isDashing = true; // Activamos el estado de dash
         dashTime = 0; // Reiniciamos el temporizador del dash
@@ -252,7 +251,7 @@ public class PlayerMove : MonoBehaviour
         dashDirection = playerVelocity.sqrMagnitude > 0 ? playerVelocity.normalized : transform.forward;
     }
 
-    void HandleDash()
+    private void HandleDash()
     {
         dashTime += Time.deltaTime; // Aumentamos el tiempo transcurrido en el dash
         animator.SetFloat(ZSpeed, dashSpeed);
