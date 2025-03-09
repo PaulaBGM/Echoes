@@ -60,6 +60,8 @@ public class PlayerMove : Player_Behavior
     {
         base.Update();
 
+        if (isDead) return;
+
         if (isDashing)
         {
             HandleDash();

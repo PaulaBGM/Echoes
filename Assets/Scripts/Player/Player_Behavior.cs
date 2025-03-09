@@ -7,7 +7,9 @@ public class Player_Behavior : MonoBehaviour, ITargeteable
     protected CharacterController ch_Controller;
     protected Animator animator;
 
-    private bool shortWeapon = true;
+    [SerializeField] private float maxLife = 100f;
+    private float currentLife = 0f;
+    protected bool isDead = false;
 
     void Start()
     {
@@ -17,9 +19,8 @@ public class Player_Behavior : MonoBehaviour, ITargeteable
 
     protected virtual void Update()
     {
-        if(shortWeapon)
-        {
-            animator.SetBool("longWeapon", shortWeapon);
-        }
+        if(isDead) return;
+
+        if (currentLife < 0) isDead = true;
     }
 }
