@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour, ITargeteable
+public class PlayerMove : Player_Behavior
 {
-    private CharacterController ch_Controller;
-    private Animator animator;
     private float gravity = -9.8f;
 
     [Header("Movement")]
@@ -15,10 +13,12 @@ public class PlayerMove : MonoBehaviour, ITargeteable
     [SerializeField] private float stickToGroundSpeed = -3f;
 
     [Header("Jump")]
+    private float jumpTimer = 0f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float endJumpAnimTime = 1.5f;
     [SerializeField] private float startJumpAnimTime = 0.5f;
+    [SerializeField] private float timeBetweenJump = 0.5f;
 
     [Header("Crouched")]
     [SerializeField] private float crouchSpeed = 1f;
@@ -35,6 +35,7 @@ public class PlayerMove : MonoBehaviour, ITargeteable
     private Vector3 playerVelocity;
     private float verticalVelocity;
     private bool isJumping;
+    private bool running = false;
     private bool waitingForJumpAnim = false;
     private bool endJump = true;
 
@@ -55,19 +56,20 @@ public class PlayerMove : MonoBehaviour, ITargeteable
     private static readonly int XSpeed = Animator.StringToHash("xSpeed");
     private static readonly int Crouched = Animator.StringToHash("crouched");
 
-    void Start()
+    protected override void Update()
     {
-        ch_Controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
-    }
+        base.Update();
 
-
-    void Update()
-    {
         if (isDashing)
         {
             HandleDash();
             return;
+        }
+
+        if (running)
+        {
+            startJumpAnimTime = 0;
+            endJumpAnimTime = 0.1f;
         }
 
         UpdatePlayerVelocity();
@@ -148,6 +150,7 @@ public class PlayerMove : MonoBehaviour, ITargeteable
         {
             //Interpolar para caminar y correr.
             float targetSpeed = Input.GetKey(KeyCode.LeftShift) && !isCrouched ? runSpeed : normalSpeed; //Si presiona Shift y no está agachado se usa la velocidad para correr sino usa la velociad normal.
+            running = true;
             currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * 5); //Suaviza el cambio de velocidad gradualmente.
         }
 
@@ -161,6 +164,7 @@ public class PlayerMove : MonoBehaviour, ITargeteable
 
     private void DoJump()
     {
+        jumpTimer += Time.deltaTime;
         // Aplicar gravedad cuando el personaje está en el aire
         if (!ch_Controller.isGrounded)
         {
@@ -168,7 +172,7 @@ public class PlayerMove : MonoBehaviour, ITargeteable
         }
 
         // Iniciar salto
-        if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping && !waitingForJumpAnim)
+        if (Input.GetAxisRaw("Jump") > 0.5f && ch_Controller.isGrounded && !isJumping && !waitingForJumpAnim && endJump && jumpTimer > timeBetweenJump)
         {
             isJumping = true;
             waitingForJumpAnim = true;
@@ -180,6 +184,7 @@ public class PlayerMove : MonoBehaviour, ITargeteable
         if (ch_Controller.isGrounded && !endJump && !isJumping)
         {
             endJump = true;
+            jumpTimer = 0;
             animator.SetInteger(Jump, 0);
             verticalVelocity = stickToGroundSpeed;
         }
