@@ -208,22 +208,22 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5301566948505924748}
-    m_Position: {x: 60, y: 140, z: 0}
+    m_Position: {x: 40, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1755907723143254299}
-    m_Position: {x: 750, y: 130, z: 0}
+    m_Position: {x: 890, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9036759569853074594}
-    m_Position: {x: 330, y: 250, z: 0}
+    m_Position: {x: 350, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1529598306403727531}
-    m_Position: {x: 90, y: 20, z: 0}
+    m_Position: {x: 110, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6400952645669304074}
-    m_Position: {x: 410, y: 10, z: 0}
+    m_Position: {x: 520, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2595997387391243628}
-    m_Position: {x: 490, y: 130, z: 0}
+    m_Position: {x: 600, y: 130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -4874596753506827388}
@@ -232,7 +232,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 330, y: -90, z: 0}
-  m_EntryPosition: {x: 350, y: 330, z: 0}
+  m_EntryPosition: {x: 370, y: 330, z: 0}
   m_ExitPosition: {x: 800, y: -140, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -9036759569853074594}
@@ -1282,7 +1282,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: zSpeed
     m_Mirror: 0
-  m_BlendParameter: xSpeed
+  m_BlendParameter: zSpeed
   m_BlendParameterY: zSpeed
   m_MinThreshold: 0
   m_MaxThreshold: 1
