@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  numWeapon: 0
 --- !u!1001 &245556105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,7 +866,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
-  numWeapon: 1
 --- !u!1 &885467439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,6 +1977,11 @@ PrefabInstance:
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: startJumpAnimTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: initialJumpAnimTime
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,

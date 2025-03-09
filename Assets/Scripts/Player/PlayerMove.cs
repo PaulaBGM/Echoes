@@ -17,8 +17,9 @@ public class PlayerMove : Player_Behavior
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float endJumpAnimTime = 1.5f;
-    [SerializeField] private float startJumpAnimTime = 0.5f;
+    private float startJumpAnimTime;
     [SerializeField] private float timeBetweenJump = 0.5f;
+    [SerializeField] private float initialJumpAnimTime;
 
     [Header("Crouched")]
     [SerializeField] private float crouchSpeed = 1f;
@@ -71,7 +72,10 @@ public class PlayerMove : Player_Behavior
         if (running)
         {
             startJumpAnimTime = 0;
-            endJumpAnimTime = 0.1f;
+        }
+        else
+        {
+            startJumpAnimTime = initialJumpAnimTime;
         }
 
         UpdatePlayerVelocity();
@@ -132,34 +136,46 @@ public class PlayerMove : Player_Behavior
         }
     }
 
-    private void UpdatePlayerVelocity() 
+    private void UpdatePlayerVelocity()
     {
-        //se recogen los input
+        // Se recogen los inputs
         float xInput = Input.GetAxis("Horizontal");
         float zInput = Input.GetAxis("Vertical");
 
-        Vector3 vectorInput = new Vector3(xInput,0, zInput);
-        if(vectorInput.sqrMagnitude > 1) 
+        Vector3 vectorInput = new Vector3(xInput, 0, zInput);
+
+        // Normalizamos el vectorInput si su magnitud es mayor que 1
+        if (vectorInput.sqrMagnitude > 1)
         {
             vectorInput.Normalize();
         }
 
+        // Actualizamos la velocidad actual según el estado de agachado o corriendo
         if (isCrouched)
         {
-            currentSpeed = crouchSpeed;
+            currentSpeed = crouchSpeed; // Si está agachado, se usa la velocidad de agachado
+            running = false; // Si está agachado, no se está corriendo
         }
         else
         {
-            //Interpolar para caminar y correr.
-            float targetSpeed = Input.GetKey(KeyCode.LeftShift) && !isCrouched ? runSpeed : normalSpeed; //Si presiona Shift y no está agachado se usa la velocidad para correr sino usa la velociad normal.
-            running = true;
-            currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * 5); //Suaviza el cambio de velocidad gradualmente.
+            // Si se pulsa Shift, asignamos la velocidad de correr
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                currentSpeed = runSpeed;
+                running = true; // Se establece running a true si estamos corriendo
+            }
+            else
+            {
+                currentSpeed = normalSpeed; // Si no se pulsa Shift, se corre con velocidad normal
+                running = false; // No estamos corriendo
+            }
         }
 
+        // Calculamos la velocidad en función de los inputs
         Vector3 localPlayerVelocity = new Vector3(xInput * currentSpeed, 0, zInput * currentSpeed);
-        playerVelocity = transform.TransformVector(localPlayerVelocity);
+        playerVelocity = transform.TransformVector(localPlayerVelocity); // Convertimos la velocidad local a la global
 
-        //Llamar a las animaciones pasándole la velocidad de movimiento en cada eje.
+        // Llamamos a las animaciones pasándole la velocidad de movimiento en cada eje
         animator.SetFloat(ZSpeed, localPlayerVelocity.z);
         animator.SetFloat(XSpeed, localPlayerVelocity.x);
     }
