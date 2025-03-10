@@ -17,11 +17,6 @@ public class AIBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         agent.stoppingDistance = stopDistance;
-    }
-
-   
-    void Update()
-    {
-        
+        enemyBehavior = GetComponent<EnemyBehavior>();
     }
 }

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public enum EnemyState 
 {
@@ -11,16 +13,21 @@ public enum EnemyState
     Attack,
     Jump,
 }
+[Serializable, RequireComponent(typeof(CapsuleCollider))] 
 public class EnemyBehavior : MonoBehaviour
 {
-    [Header("Current States")]
+    [Header("Current State")]
     [SerializeField] private EnemyState state;
     [field: SerializeField] public Transform target { get; private set; }
     [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private float detectionDistance;
+    [SerializeField] private float attackDistance;
     [SerializeField] private AIBase[] aiStates;
+    [SerializeField] private float timeBetweenAttacks = 2.5f;
+    [SerializeField] private float strongAttackChance = 0.3f;
     private NavMeshAgent agent;
     private Animator animator;
+    private float timeNextAttack;
 
     void Start()
     {
@@ -66,7 +73,15 @@ public class EnemyBehavior : MonoBehaviour
     private void UpdateFollowingPlayer() 
     {
         if (!PlayerIsOnRange(detectionDistance)) return;
-        ChangeState(EnemyState.FollowingPlayer);
+       if (PlayerIsOnRange(attackDistance))
+        {
+            ChangeState(EnemyState.Attack);
+        }
+       else {
+            agent.ResetPath();
+            ChangeState(EnemyState.FollowingPath);
+        }
+        
     }
 
     private void UpdateFollowingPath()
@@ -76,8 +91,27 @@ public class EnemyBehavior : MonoBehaviour
     }
     private void UpdateAttack()
     {
-        if (!PlayerIsOnRange(detectionDistance)) return;
-        ChangeState(EnemyState.FollowingPlayer);
+        if (!PlayerIsOnRange(attackDistance)) 
+        {
+          ChangeState(EnemyState.FollowingPlayer);
+        }
+        else
+        {
+            transform.LookAt(target.position);
+            timeNextAttack -= Time.deltaTime;
+            if (timeNextAttack <= 0) 
+            {
+                if (Random.Range(0.0f, 1.0f) < strongAttackChance) 
+                {
+                    //animacion strong attack
+                }
+                else
+                {
+                     //animacion normal attack
+                }
+                timeNextAttack = timeBetweenAttacks;
+            }
+        }
     }
     private void UpdateJump() 
     {
