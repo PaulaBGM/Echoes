@@ -37,6 +37,7 @@ public class PlayerMove : Player_Behavior
     private float verticalVelocity;
     private bool isJumping;
     private bool running = false;
+    private bool walking = false;
     private bool waitingForJumpAnim = false;
     private bool endJump = true;
 
@@ -69,7 +70,7 @@ public class PlayerMove : Player_Behavior
             return;
         }
 
-        if (running)
+        if (running || walking)
         {
             startJumpAnimTime = 0;
         }
@@ -163,11 +164,13 @@ public class PlayerMove : Player_Behavior
             {
                 currentSpeed = runSpeed;
                 running = true; // Se establece running a true si estamos corriendo
+                walking = false;
             }
             else
             {
                 currentSpeed = normalSpeed; // Si no se pulsa Shift, se corre con velocidad normal
                 running = false; // No estamos corriendo
+                walking = true;
             }
         }
 
