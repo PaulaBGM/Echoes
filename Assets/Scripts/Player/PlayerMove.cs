@@ -70,7 +70,7 @@ public class PlayerMove : Player_Behavior
             return;
         }
 
-        if (running || walking)
+        if (walking)
         {
             startJumpAnimTime = 0;
         }
@@ -145,6 +145,9 @@ public class PlayerMove : Player_Behavior
 
         Vector3 vectorInput = new Vector3(xInput, 0, zInput);
 
+        // Determinar si el jugador está en movimiento
+        walking = vectorInput.sqrMagnitude > 0.01f;
+
         // Normalizamos el vectorInput si su magnitud es mayor que 1
         if (vectorInput.sqrMagnitude > 1)
         {
@@ -155,7 +158,7 @@ public class PlayerMove : Player_Behavior
         if (isCrouched)
         {
             currentSpeed = crouchSpeed; // Si está agachado, se usa la velocidad de agachado
-            running = false; // Si está agachado, no se está corriendo
+            walking = false; // Si está agachado, no se está corriendo
         }
         else
         {
@@ -163,14 +166,10 @@ public class PlayerMove : Player_Behavior
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 currentSpeed = runSpeed;
-                running = true; // Se establece running a true si estamos corriendo
-                walking = false;
             }
             else
             {
                 currentSpeed = normalSpeed; // Si no se pulsa Shift, se corre con velocidad normal
-                running = false; // No estamos corriendo
-                walking = true;
             }
         }
 
