@@ -1,35 +1,45 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AIWandering : AIBase
 {
     [SerializeField] private float wanderRadius;
+    [SerializeField] private float waitTime = 2f; // Tiempo de espera antes de moverse
     private Vector3 initialPosition;
     private Vector3 randomEndPoint;
+    private bool isWaiting = false;
 
     protected override void Start()
     {
         base.Start();
         anim.SetTrigger("Wandering");
-        initialPosition = transform.position;  
+        initialPosition = transform.position;
+        StartCoroutine(WaitBeforeMoving());
         SetNewRandomPoint();
     }
 
     void Update()
     {
-        if (!agent.enabled) return;
-        if (agent.remainingDistance < stopDistance && !agent.pathPending) 
-        {
-            SetNewRandomPoint();
-        }
+        if (!agent.enabled || isWaiting) return;
+        
     }
-    private void SetNewRandomPoint() 
+
+    private IEnumerator WaitBeforeMoving()
+    {
+        isWaiting = true;
+        anim.SetTrigger("Wandering"); // Mantener la animación de "Wandering"
+        yield return new WaitForSeconds(waitTime); // Esperar unos segundos
+        SetNewRandomPoint();
+        isWaiting = false;
+    }
+
+    private void SetNewRandomPoint()
     {
         randomEndPoint = initialPosition + Random.insideUnitSphere * wanderRadius;
         randomEndPoint.y = 0;
         agent.SetDestination(randomEndPoint);
     }
+
     private void OnDrawGizmos()
     {
         if (agent != null)
