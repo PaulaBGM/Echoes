@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 010eff3db4e0dbc48be7428173b65686
+guid: 50afb8a71744ae14faaf33a80222b72a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: LongWeaponAim_Anim
+      name: ShortWeapon_Idle_Anim
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 93
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

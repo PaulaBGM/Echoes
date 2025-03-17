@@ -15,6 +15,8 @@ public class GetWeapon : Player_Behavior
         // Verifica si estás cerca de un arma y presionas "F"
         if (isNearWeapon && Input.GetKeyDown(KeyCode.F))
         {
+            animator.SetLayerWeight(0, 0);
+
             if (currentWeapon != null)
             {
                 // Verifica el tipo de arma y activa la correspondiente

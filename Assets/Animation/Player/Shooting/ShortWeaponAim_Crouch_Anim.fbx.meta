@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eeeae3617d718454f900700049dbe4fe
+guid: 6a9441f4799d6b946b03ea48f0751dd0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ShortWeaponAim_Anim
+      name: ShortWeaponAim_Crouch_Anim
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 17
-      lastFrame: 19
+      firstFrame: 0
+      lastFrame: 114
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
