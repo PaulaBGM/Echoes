@@ -1,21 +1,42 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetWeapon : Player_Behavior
+public class GetWeapon : MonoBehaviour
 {
-    [SerializeField] private GameObject[] weapon; // Array para las armas en la escena
-    private bool isNearWeapon = false; // Variable para saber si estás cerca de un arma
+    private PlayerLife playerHealth;
+    private AimStateManager aimState;
     private Weapon currentWeapon; // Referencia al arma que está cerca del jugador
 
-    protected override void Update()
-    {
-        base.Update();
+    [Header("Camera")]
+    [SerializeField] private GameObject crosshairImage;
+    [SerializeField] private GameObject normalCamera;
+    [SerializeField] private GameObject pistolCamera;
+    [SerializeField] private Transform camFollowPos_Pistol;
 
+    [SerializeField] private GameObject[] weapon; // Array para las armas en la escena
+    private bool isNearWeapon = false; // Variable para saber si estás cerca de un arma
+
+    private void Start()
+    {
+        aimState = GetComponent<AimStateManager>();
+        playerHealth = GetComponent<PlayerLife>();
+
+        crosshairImage.SetActive(false);
+        pistolCamera.SetActive(false);
+        normalCamera.SetActive(true);
+    }
+
+    private void Update()
+    {
         // Verifica si estás cerca de un arma y presionas "F"
         if (isNearWeapon && Input.GetKeyDown(KeyCode.F))
         {
-            animator.SetLayerWeight(0, 0);
+            aimState.camFollowPos = camFollowPos_Pistol;
+            crosshairImage.SetActive(true);
+            pistolCamera.SetActive(true);
+            normalCamera.SetActive(false);
 
             if (currentWeapon != null)
             {
@@ -23,14 +44,14 @@ public class GetWeapon : Player_Behavior
                 switch (currentWeapon.weaponType)
                 {
                     case WeaponType.Long:
-                        animator.SetBool("longWeapon", true);
-                        animator.SetBool("shortWeapon", false);
+                        playerHealth.Animator.SetBool("longWeapon", true);
+                        playerHealth.Animator.SetBool("shortWeapon", false);
                         ActivateWeapon(0); // Asumimos que el índice 0 es para el arma larga
                         break;
 
                     case WeaponType.Short:
-                        animator.SetBool("shortWeapon", true);
-                        animator.SetBool("longWeapon", false);
+                        playerHealth.Animator.SetBool("shortWeapon", true);
+                        playerHealth.Animator.SetBool("longWeapon", false);
                         ActivateWeapon(1); // Asumimos que el índice 1 es para el arma corta
                         break;
                 }

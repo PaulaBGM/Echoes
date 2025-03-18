@@ -6,7 +6,7 @@ using Cinemachine;
 public class AimStateManager : MonoBehaviour
 {
     public AxisState xAxis, yAxis;
-    [SerializeField] private Transform camFollowPos;
+    public Transform camFollowPos;
 
     [Header("Smooth Settings")]
     [SerializeField] private float smoothSpeed = 10f; // Velocidad de suavizado

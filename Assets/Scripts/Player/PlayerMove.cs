@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : Player_Behavior
+public class PlayerMove : MonoBehaviour
 {
+    private CharacterController ch_Controller;
+    private PlayerLife playerHealth;
     private float gravity = -9.8f;
 
     [Header("Movement")]
@@ -36,7 +38,6 @@ public class PlayerMove : Player_Behavior
     private Vector3 playerVelocity;
     private float verticalVelocity;
     private bool isJumping;
-    private bool running = false;
     private bool walking = false;
     private bool waitingForJumpAnim = false;
     private bool endJump = true;
@@ -58,11 +59,15 @@ public class PlayerMove : Player_Behavior
     private static readonly int XSpeed = Animator.StringToHash("xSpeed");
     private static readonly int Crouched = Animator.StringToHash("crouched");
 
-    protected override void Update()
+    private void Start()
     {
-        base.Update();
+        ch_Controller = GetComponent<CharacterController>();
+        playerHealth = GetComponent<PlayerLife>();
+    }
 
-        if (isDead) return;
+    private  void Update()
+    {
+        if (playerHealth.IsDead) return;
 
         if (isDashing)
         {
@@ -101,8 +106,8 @@ public class PlayerMove : Player_Behavior
         if (playerVelocity.sqrMagnitude > 0.01f || isJumping || isDashing || isCrouched)
         {
             longIdleTimer = 0f;
-            animator.SetBool("longIdle", false);
-            animator.SetBool("movement", true);
+            playerHealth.Animator.SetBool("longIdle", false);
+            playerHealth.Animator.SetBool("movement", true);
             return;
         }
 
@@ -111,8 +116,8 @@ public class PlayerMove : Player_Behavior
 
         if (longIdleTimer > longIdleTime)
         {
-            animator.SetBool("longIdle", true);
-            animator.SetBool("movement", false);
+            playerHealth.Animator.SetBool("longIdle", true);
+            playerHealth.Animator.SetBool("movement", false);
         }
     }
 
@@ -178,8 +183,8 @@ public class PlayerMove : Player_Behavior
         playerVelocity = transform.TransformVector(localPlayerVelocity); // Convertimos la velocidad local a la global
 
         // Llamamos a las animaciones pasándole la velocidad de movimiento en cada eje
-        animator.SetFloat(ZSpeed, localPlayerVelocity.z);
-        animator.SetFloat(XSpeed, localPlayerVelocity.x);
+        playerHealth.Animator.SetFloat(ZSpeed, localPlayerVelocity.z);
+        playerHealth.Animator.SetFloat(XSpeed, localPlayerVelocity.x);
     }
 
     private void DoJump()
@@ -196,7 +201,7 @@ public class PlayerMove : Player_Behavior
         {
             isJumping = true;
             waitingForJumpAnim = true;
-            animator.SetInteger(Jump, 1); // Activa la animación de salto
+            playerHealth.Animator.SetInteger(Jump, 1); // Activa la animación de salto
             StartCoroutine(JumpCoroutine()); // Iniciamos la corrutina de animación
         }
 
@@ -205,7 +210,7 @@ public class PlayerMove : Player_Behavior
         {
             endJump = true;
             jumpTimer = 0;
-            animator.SetInteger(Jump, 0);
+            playerHealth.Animator.SetInteger(Jump, 0);
             verticalVelocity = stickToGroundSpeed;
         }
     }
@@ -221,7 +226,7 @@ public class PlayerMove : Player_Behavior
     private IEnumerator EndJumpCoroutine()
     {
         yield return new WaitForSeconds(endJumpAnimTime); // Espera un poco para sincronizar con la animación
-        animator.SetInteger(Jump, 2); // Activa la animación de salto
+        playerHealth.Animator.SetInteger(Jump, 2); // Activa la animación de salto
         isJumping = false;
         waitingForJumpAnim = false;
     }
@@ -231,7 +236,7 @@ public class PlayerMove : Player_Behavior
         isCrouched = true;
         ch_Controller.height = crouchHeight;
         ch_Controller.center = new Vector3(0, crouchCenter, 0);
-        animator.SetInteger(Crouched, 1);
+        playerHealth.Animator.SetInteger(Crouched, 1);
         tryingToStand = false;
     }
 
@@ -255,7 +260,7 @@ public class PlayerMove : Player_Behavior
     {
         ch_Controller.height = standHeight;
         ch_Controller.center = new Vector3(0, standCenter, 0);
-        animator.SetInteger(Crouched, 2);
+        playerHealth.Animator.SetInteger(Crouched, 2);
         isCrouched = false;
         StartCoroutine(ResetCrouchState());
     }
@@ -263,7 +268,7 @@ public class PlayerMove : Player_Behavior
     private IEnumerator ResetCrouchState()
     {
         yield return new WaitForSeconds(endCrouchAnimTime);
-        animator.SetInteger(Crouched, 0);
+        playerHealth.Animator.SetInteger(Crouched, 0);
     }
 
     private void StartDash()
@@ -279,7 +284,7 @@ public class PlayerMove : Player_Behavior
     private void HandleDash()
     {
         dashTime += Time.deltaTime; // Aumentamos el tiempo transcurrido en el dash
-        animator.SetFloat(ZSpeed, dashSpeed);
+        playerHealth.Animator.SetFloat(ZSpeed, dashSpeed);
         ch_Controller.Move(dashDirection * dashSpeed * Time.deltaTime); // Movemos al jugador en la dirección del dash
         if (dashTime >= dashDuration) isDashing = false; // Terminamos el dash cuando se cumple el tiempo
     }

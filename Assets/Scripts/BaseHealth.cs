@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class BaseHealth: MonoBehaviour, IDamagable
+{
+    protected Animator animator;
+
+    [SerializeField] private float maxLife = 100f;
+    [SerializeField] private float damageCooldown;
+    private float currentLife = 0f;
+    protected bool isDead = false;
+    private bool canTakeDamage;
+
+    public Animator Animator { get => animator; }
+    public bool IsDead { get => isDead; }
+    public float CurrentLife { get => currentLife; }
+    public float MaxLife { get => maxLife; }
+
+    protected virtual void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    protected virtual void Start()
+    {
+        currentLife = maxLife;
+        canTakeDamage = true;
+    }
+
+    public void ApplyDamage(float damage) //Hace daño según el golpe recibido.
+    {
+        if (currentLife >= 0 || !canTakeDamage) return;
+
+        currentLife -= damage;
+
+        if(currentLife <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            StartCoroutine(DamageCoolDown());
+        }
+    }
+
+    public void Heal(float heal) //Cura según el valor del objeto recogido.
+    {
+        if (currentLife <= 0) return;
+
+        currentLife += heal;
+
+        if(currentLife>maxLife)
+        {
+            currentLife = maxLife;
+        }
+    }
+
+    private IEnumerator DamageCoolDown() //Corrutina que impide volver a recibir daño durante unos segundos.
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(damageCooldown);
+        canTakeDamage = true;
+    }
+
+    protected abstract void Die(); //Se llama desde el script del jugador o enemigo.
+}
