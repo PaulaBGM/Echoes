@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private CharacterController ch_Controller;
-    private PlayerLife playerHealth;
+    private PlayerBehavior playerBehavior;
     private float gravity = -9.8f;
 
     [Header("Movement")]
@@ -41,6 +41,7 @@ public class PlayerMove : MonoBehaviour
     private bool walking = false;
     private bool waitingForJumpAnim = false;
     private bool endJump = true;
+    public bool canLongIddle;
 
     private bool isCrouched = false;
     private bool tryingToStand = false;
@@ -62,12 +63,12 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         ch_Controller = GetComponent<CharacterController>();
-        playerHealth = GetComponent<PlayerLife>();
+        playerBehavior = GetComponent<PlayerBehavior>();
     }
 
     private  void Update()
     {
-        if (playerHealth.IsDead) return;
+        if (playerBehavior.IsDead) return;
 
         if (isDashing)
         {
@@ -102,12 +103,13 @@ public class PlayerMove : MonoBehaviour
 
     private void LongIdle()
     {
+        if (!canLongIddle) return;
         // Si el jugador está en movimiento, reiniciamos el temporizador
         if (playerVelocity.sqrMagnitude > 0.01f || isJumping || isDashing || isCrouched)
         {
             longIdleTimer = 0f;
-            playerHealth.Animator.SetBool("longIdle", false);
-            playerHealth.Animator.SetBool("movement", true);
+            playerBehavior.Animator.SetBool("longIdle", false);
+            playerBehavior.Animator.SetBool("movement", true);
             return;
         }
 
@@ -116,8 +118,8 @@ public class PlayerMove : MonoBehaviour
 
         if (longIdleTimer > longIdleTime)
         {
-            playerHealth.Animator.SetBool("longIdle", true);
-            playerHealth.Animator.SetBool("movement", false);
+            playerBehavior.Animator.SetBool("longIdle", true);
+            playerBehavior.Animator.SetBool("movement", false);
         }
     }
 
@@ -183,8 +185,8 @@ public class PlayerMove : MonoBehaviour
         playerVelocity = transform.TransformVector(localPlayerVelocity); // Convertimos la velocidad local a la global
 
         // Llamamos a las animaciones pasándole la velocidad de movimiento en cada eje
-        playerHealth.Animator.SetFloat(ZSpeed, localPlayerVelocity.z);
-        playerHealth.Animator.SetFloat(XSpeed, localPlayerVelocity.x);
+        playerBehavior.Animator.SetFloat(ZSpeed, localPlayerVelocity.z);
+        playerBehavior.Animator.SetFloat(XSpeed, localPlayerVelocity.x);
     }
 
     private void DoJump()
@@ -201,7 +203,7 @@ public class PlayerMove : MonoBehaviour
         {
             isJumping = true;
             waitingForJumpAnim = true;
-            playerHealth.Animator.SetInteger(Jump, 1); // Activa la animación de salto
+            playerBehavior.Animator.SetInteger(Jump, 1); // Activa la animación de salto
             StartCoroutine(JumpCoroutine()); // Iniciamos la corrutina de animación
         }
 
@@ -210,7 +212,7 @@ public class PlayerMove : MonoBehaviour
         {
             endJump = true;
             jumpTimer = 0;
-            playerHealth.Animator.SetInteger(Jump, 0);
+            playerBehavior.Animator.SetInteger(Jump, 0);
             verticalVelocity = stickToGroundSpeed;
         }
     }
@@ -226,7 +228,7 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator EndJumpCoroutine()
     {
         yield return new WaitForSeconds(endJumpAnimTime); // Espera un poco para sincronizar con la animación
-        playerHealth.Animator.SetInteger(Jump, 2); // Activa la animación de salto
+        playerBehavior.Animator.SetInteger(Jump, 2); // Activa la animación de salto
         isJumping = false;
         waitingForJumpAnim = false;
     }
@@ -236,7 +238,7 @@ public class PlayerMove : MonoBehaviour
         isCrouched = true;
         ch_Controller.height = crouchHeight;
         ch_Controller.center = new Vector3(0, crouchCenter, 0);
-        playerHealth.Animator.SetInteger(Crouched, 1);
+        playerBehavior.Animator.SetInteger(Crouched, 1);
         tryingToStand = false;
     }
 
@@ -260,7 +262,7 @@ public class PlayerMove : MonoBehaviour
     {
         ch_Controller.height = standHeight;
         ch_Controller.center = new Vector3(0, standCenter, 0);
-        playerHealth.Animator.SetInteger(Crouched, 2);
+        playerBehavior.Animator.SetInteger(Crouched, 2);
         isCrouched = false;
         StartCoroutine(ResetCrouchState());
     }
@@ -268,7 +270,7 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator ResetCrouchState()
     {
         yield return new WaitForSeconds(endCrouchAnimTime);
-        playerHealth.Animator.SetInteger(Crouched, 0);
+        playerBehavior.Animator.SetInteger(Crouched, 0);
     }
 
     private void StartDash()
@@ -284,7 +286,7 @@ public class PlayerMove : MonoBehaviour
     private void HandleDash()
     {
         dashTime += Time.deltaTime; // Aumentamos el tiempo transcurrido en el dash
-        playerHealth.Animator.SetFloat(ZSpeed, dashSpeed);
+        playerBehavior.Animator.SetFloat(ZSpeed, dashSpeed);
         ch_Controller.Move(dashDirection * dashSpeed * Time.deltaTime); // Movemos al jugador en la dirección del dash
         if (dashTime >= dashDuration) isDashing = false; // Terminamos el dash cuando se cumple el tiempo
     }

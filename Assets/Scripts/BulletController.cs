@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    [SerializeField] private float bulletSpeed = 10f;
+    private Rigidbody rb;
+    [SerializeField] private float bulletPower = 10f;  // Dale un valor mayor a 0
     [SerializeField] private float lifeTime = 4f;
-
     private float time = 0f;
 
     void Start()
     {
-        Debug.Log("Bala creada con dirección: " + transform.forward);
+        rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * bulletPower, ForceMode.Impulse);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // Mueve la bala hacia adelante
-        transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
-
-        Debug.Log("Moviendo bala a: " + transform.position + " con dirección: " + transform.forward);
-
-        // Control de tiempo de vida de la bala
         time += Time.deltaTime;
         if (time >= lifeTime)
         {

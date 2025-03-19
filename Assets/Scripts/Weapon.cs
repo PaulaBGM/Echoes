@@ -5,7 +5,8 @@ using UnityEngine;
 public enum WeaponType
 {
     Long,
-    Short
+    Short,
+    BackWeapon
 }
 
 public class Weapon : MonoBehaviour, IWeapons
