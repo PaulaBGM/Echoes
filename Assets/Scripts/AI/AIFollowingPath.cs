@@ -7,6 +7,7 @@ public class AIFollowingPath : AIBase
     [SerializeField] private Transform[] wayPoints;
     private int currentPathIndex = 0;
     private int direction = 1;
+    
     protected override void Start()
     {
         base.Start();
@@ -16,13 +17,16 @@ public class AIFollowingPath : AIBase
 
     private void Update()
     {
+        agent.speed = 3f;
+        anim.SetFloat("zSpeed", agent.speed);
         if (agent.remainingDistance < stopDistance && !agent.pathPending) 
         {
+            Debug.Log("Update Path");
             GoToNextPoint();
         }
     }
 
-    private void GoToNextPoint() 
+    public void GoToNextPoint() 
     {
         agent.SetDestination(wayPoints[currentPathIndex].position);
         currentPathIndex += direction;

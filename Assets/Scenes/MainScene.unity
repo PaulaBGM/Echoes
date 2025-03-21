@@ -908,6 +908,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6503095085419145664}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &714351401 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: 026472ad5a54f044a8f91a6e84cf6e92,
+    type: 3}
+  m_PrefabInstance: {fileID: 1053326248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &779960879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,11 +1693,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1053326258}
+      addedObject: {fileID: 1053326257}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1053326257}
+      addedObject: {fileID: 1053326261}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1053326262}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1053326263}
   m_SourcePrefab: {fileID: 100100000, guid: 026472ad5a54f044a8f91a6e84cf6e92, type: 3}
 --- !u!1 &1053326249 stripped
 GameObject:
@@ -1711,14 +1725,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5832a992189510e4a9c3426dfacced25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   <target>k__BackingField: {fileID: 973697045}
-  capsuleCollider: {fileID: 1053326254}
+  sphereCollider: {fileID: 1053326262}
   detectionDistance: 3
   attackDistance: 0
   aiStates: []
   timeBetweenAttacks: 2.5
   strongAttackChance: 0.3
+  runSpeed: 5
+  normalSpeed: 3
 --- !u!114 &1053326251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1744,7 +1760,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1773,7 +1789,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1.8
@@ -1796,7 +1812,41 @@ MonoBehaviour:
   - {fileID: 473324114}
   - {fileID: 330849101}
   - {fileID: 326513630}
---- !u!114 &1053326258
+--- !u!114 &1053326261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053326249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7f93e97a25932449b8b7bd6da79087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHead: {fileID: 714351401}
+--- !u!135 &1053326262
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053326249}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5684528
+  m_Center: {x: -0.010490894, y: 1.7800469, z: 0}
+--- !u!114 &1053326263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2286,6 +2336,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964104051}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1981997134 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5060700525854021168, guid: d031a506946b06d409f004193857ab86,
+    type: 3}
+  m_PrefabInstance: {fileID: 6503095085419145664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2028295325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,6 +2824,11 @@ PrefabInstance:
       propertyPath: crosshairImage
       value: 
       objectReference: {fileID: 1327270651}
+    - target: {fileID: 3437740022030172979, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: chestBone
+      value: 
+      objectReference: {fileID: 1981997134}
     - target: {fileID: 3437740022030172979, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: longWeaponController

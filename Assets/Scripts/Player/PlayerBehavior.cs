@@ -8,6 +8,7 @@ public class PlayerBehavior : BaseHealth, ITargeteable
     private PlayerMove playerMove;
     [SerializeField] private WeaponController longWeaponController, shortWeaponController;
     private GetWeapon getWeapon;
+    public Transform chestBone;
 
     protected override void Start()
     {

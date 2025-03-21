@@ -12,7 +12,6 @@ public class AIWandering : AIBase
     protected override void Start()
     {
         base.Start();
-        anim.SetTrigger("Wandering");
         initialPosition = transform.position;
         StartCoroutine(WaitBeforeMoving());
         SetNewRandomPoint();
