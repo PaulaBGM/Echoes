@@ -1693,6 +1693,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1053326263}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1053326257}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
         type: 3}
@@ -1702,10 +1706,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1053326262}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 026472ad5a54f044a8f91a6e84cf6e92,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1053326263}
   m_SourcePrefab: {fileID: 100100000, guid: 026472ad5a54f044a8f91a6e84cf6e92, type: 3}
 --- !u!1 &1053326249 stripped
 GameObject:
@@ -1725,16 +1725,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5832a992189510e4a9c3426dfacced25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   <target>k__BackingField: {fileID: 973697045}
   sphereCollider: {fileID: 1053326262}
-  detectionDistance: 3
+  detectionDistance: 7
   attackDistance: 0
   aiStates: []
   timeBetweenAttacks: 2.5
   strongAttackChance: 0.3
-  runSpeed: 5
-  normalSpeed: 3
+  wanderingTime: 5
 --- !u!114 &1053326251
 MonoBehaviour:
   m_ObjectHideFlags: 0
