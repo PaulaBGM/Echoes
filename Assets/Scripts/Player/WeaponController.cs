@@ -1,16 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
     [SerializeField] private AimStateManager aimState;
-
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shootSpawn;
-    [SerializeField] private float fireRate = 0.1f; // Disparo cada 0.1 segundos
+    [SerializeField] private float fireRate;
     private float lastShootTime = 0f;
-
 
     [Header("Camera")]
     [SerializeField] private GameObject crosshairImage;
@@ -20,80 +17,89 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Transform camFollowPos_Normal;
 
     public bool isShooting = false;
+    public bool isAiming = false;
 
-    public enum ShootMode
-    {
-        Single,
-        Auto
-    }
+    public enum ShootMode { Single, Auto }
+    public ShootMode currentShootMode = ShootMode.Auto; // Puedes cambiar a Single si lo deseas
 
-    public ShootMode currentShootMode = ShootMode.Single;
-
-    private void Start()
-    {
-        aimState.camFollowPos = camFollowPos_Normal;
-
-        crosshairImage.SetActive(false);
-        pistolCamera.SetActive(false);
-        normalCamera.SetActive(true);
-    }
+    private Coroutine shootingCoroutine = null;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isShooting)
+        Debug.Log("TIEMPO DISAPRO: " + lastShootTime);
+
+        // *** DISPARO ***
+        if (Input.GetMouseButton(0))
         {
             isShooting = true;
 
-            Shoot();
+            if (currentShootMode == ShootMode.Single)
+            {
+                Shoot();
+            }
+            else if (currentShootMode == ShootMode.Auto && shootingCoroutine == null)
+            {
+                shootingCoroutine = StartCoroutine(FireCoroutine());
+            }
         }
-        else if (Input.GetMouseButtonUp(0))
+
+        if (Input.GetMouseButtonUp(0))
         {
             isShooting = false;
+            if (shootingCoroutine != null)
+            {
+                StopCoroutine(shootingCoroutine);
+                shootingCoroutine = null;
+            }
         }
 
-        Debug.DrawLine(shootSpawn.position, shootSpawn.position + shootSpawn.forward * 10f, Color.red);
-        Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.position + Camera.main.transform.forward * 10, Color.blue);
-
-        RaycastHit cameraHit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out cameraHit))
+        // *** APUNTADO ***
+        if (Input.GetMouseButton(1)) // Se mantiene mientras el botón derecho esté presionado
         {
-            Vector3 shootDirection = cameraHit.point - shootSpawn.position;
-            shootSpawn.rotation = Quaternion.LookRotation(shootDirection);
-        }
-
-        if(Input.GetMouseButtonDown(1) && !isShooting)
-        {
+            isAiming = true;
             aimState.camFollowPos = camFollowPos_Pistol;
             crosshairImage.SetActive(true);
             pistolCamera.SetActive(true);
             normalCamera.SetActive(false);
         }
-
-       else if (Input.GetMouseButtonUp(1))
+        else // Cuando se suelta, vuelve a la cámara normal
         {
+            isAiming = false;
             aimState.camFollowPos = camFollowPos_Normal;
             crosshairImage.SetActive(false);
             pistolCamera.SetActive(false);
             normalCamera.SetActive(true);
         }
+
+        // Asegurar que la posición de disparo siga la dirección de la mira
+        AlignShootSpawnWithCamera();
     }
 
-    private void Shoot()
+    void AlignShootSpawnWithCamera()
     {
-        if(isShooting)
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if(Time.time - lastShootTime > fireRate)
-            {
-                switch (currentShootMode)
-                {
-                    case ShootMode.Single:
-                        InstantiateBullet();
-                        break;
-                    case ShootMode.Auto:
-                        StartCoroutine(FireCoroutine());
-                        break;
-                }
-            }
+            targetPoint = hit.point; // Punto donde impacta el raycast
+        }
+        else
+        {
+            targetPoint = ray.origin + ray.direction * 1000f; // Punto lejano si no impacta
+        }
+
+        Vector3 shootDirection = (targetPoint - shootSpawn.position).normalized;
+        shootSpawn.rotation = Quaternion.LookRotation(shootDirection);
+    }
+
+    void Shoot()
+    {
+        if (Time.time - lastShootTime >= fireRate)
+        {
+            InstantiateBullet();
+            lastShootTime = Time.time;
+            isShooting = false;
         }
     }
 
@@ -101,12 +107,13 @@ public class WeaponController : MonoBehaviour
     {
         while (isShooting)
         {
-            InstantiateBullet();
+            Shoot();
             yield return new WaitForSeconds(fireRate);
+            isShooting = false;
         }
     }
 
-    private void InstantiateBullet()
+    void InstantiateBullet()
     {
         Instantiate(bulletPrefab, shootSpawn.position, shootSpawn.rotation);
     }

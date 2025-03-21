@@ -259,16 +259,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46576201}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 502239939}
+  m_Father: {fileID: 747462799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400.2, y: -86.4}
+  m_AnchoredPosition: {x: -509.80005, y: 403.59998}
   m_SizeDelta: {x: 620, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &46576203
@@ -1064,6 +1064,7 @@ GameObject:
   - component: {fileID: 502239942}
   - component: {fileID: 502239941}
   - component: {fileID: 502239940}
+  - component: {fileID: 502239943}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -1083,8 +1084,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 46576202}
-  - {fileID: 529220591}
+  - {fileID: 747462799}
   - {fileID: 256089298}
   - {fileID: 993537863}
   m_Father: {fileID: 2028295326}
@@ -1157,6 +1157,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &502239943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502239938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc6c79d14b87184284c1a2b2d5d6221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeBar: {fileID: 529220592}
 --- !u!1 &529220590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,16 +1195,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529220590}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 502239939}
+  m_Father: {fileID: 747462799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400.2, y: -86.4}
+  m_AnchoredPosition: {x: -509.80005, y: 403.59998}
   m_SizeDelta: {x: 592, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529220592
@@ -1238,6 +1251,43 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6503095085419145664}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &747462798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 747462799}
+  m_Layer: 5
+  m_Name: LifeBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &747462799
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747462798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 46576202}
+  - {fileID: 529220591}
+  m_Father: {fileID: 502239939}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &779960879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,17 +1932,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee58c2c2ccfb0bf4e9ef42f597b50498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimState: {fileID: 1241213065}
+  aimState: {fileID: 0}
   bulletPrefab: {fileID: 2186950268952709522, guid: fca6996b55c6139458c502145a64fee6,
     type: 3}
   shootSpawn: {fileID: 270701470}
   fireRate: 0.2
-  crosshairImage: {fileID: 1327270651}
-  normalCamera: {fileID: 885467439}
-  pistolCamera: {fileID: 2043581111}
-  camFollowPos_Pistol: {fileID: 581407576}
-  camFollowPos_Normal: {fileID: 1318718781}
+  crosshairImage: {fileID: 0}
+  normalCamera: {fileID: 0}
+  pistolCamera: {fileID: 0}
+  camFollowPos_Pistol: {fileID: 0}
+  camFollowPos_Normal: {fileID: 0}
   isShooting: 0
+  isAiming: 0
   currentShootMode: 0
 --- !u!1 &1046437681
 GameObject:
@@ -3047,6 +3098,11 @@ PrefabInstance:
       objectReference: {fileID: 1981997134}
     - target: {fileID: 3437740022030172979, guid: d031a506946b06d409f004193857ab86,
         type: 3}
+      propertyPath: lifeBarUI
+      value: 
+      objectReference: {fileID: 502239943}
+    - target: {fileID: 3437740022030172979, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
       propertyPath: longWeaponController
       value: 
       objectReference: {fileID: 6503095085419145666}
@@ -3128,7 +3184,7 @@ PrefabInstance:
     - target: {fileID: 6095561253607211723, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: fireRate
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6095561253607211723, guid: d031a506946b06d409f004193857ab86,
         type: 3}
@@ -3185,6 +3241,11 @@ PrefabInstance:
       propertyPath: weaponObjects.Array.data[2]
       value: 
       objectReference: {fileID: 1028442171}
+    - target: {fileID: 6822043666298315776, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.18
+      objectReference: {fileID: 0}
     - target: {fileID: 7959160275064935742, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: m_Name
@@ -3248,13 +3309,14 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2186950268952709522, guid: fca6996b55c6139458c502145a64fee6,
     type: 3}
   shootSpawn: {fileID: 359268820}
-  fireRate: 0.5
-  crosshairImage: {fileID: 1327270651}
-  normalCamera: {fileID: 885467439}
-  pistolCamera: {fileID: 2043581111}
-  camFollowPos_Pistol: {fileID: 581407576}
-  camFollowPos_Normal: {fileID: 1318718781}
+  fireRate: 0.2
+  crosshairImage: {fileID: 0}
+  normalCamera: {fileID: 0}
+  pistolCamera: {fileID: 0}
+  camFollowPos_Pistol: {fileID: 0}
+  camFollowPos_Normal: {fileID: 0}
   isShooting: 0
+  isAiming: 0
   currentShootMode: 0
 --- !u!1001 &6953751332018077957
 PrefabInstance:
