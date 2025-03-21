@@ -13,6 +13,7 @@ public enum EnemyState
     Attack,
     Jump,
 }
+
 [Serializable, RequireComponent(typeof(SphereCollider))]
 public class EnemyBehavior : MonoBehaviour
 {
@@ -34,17 +35,19 @@ public class EnemyBehavior : MonoBehaviour
     private Animator animator;
     private float timeNextAttack;
 
+    private AIEnemyVision enemyVision;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         aiStates = GetComponents<AIBase>();
         sphereCollider = GetComponent<SphereCollider>();
         animator = GetComponent<Animator>();
+        enemyVision = GetComponent<AIEnemyVision>();
+
         sphereCollider.radius = detectionDistance;
         state = EnemyState.Wandering;
-        
     }
-
 
     void Update()
     {
@@ -69,20 +72,19 @@ public class EnemyBehavior : MonoBehaviour
             UpdateJump();
         }
     }
+
     private void UpdateWandering()
     {
-        if (!PlayerIsOnRange(detectionDistance))
+        if (!enemyVision.CheckVisionToPlayer())
         {
             agent.speed = idleSpeed;
-            // Contamos el tiempo que lleva vagando
             currentWanderingTime += Time.deltaTime;
 
-            // Si supera el tiempo definido, cambia a FollowingPath
             if (currentWanderingTime >= wanderingTime)
             {
                 agent.speed = normalSpeed;
                 ChangeState(EnemyState.FollowingPath);
-                currentWanderingTime = 0f; // Reseteamos el contador
+                currentWanderingTime = 0f;
             }
 
             return;
@@ -90,14 +92,14 @@ public class EnemyBehavior : MonoBehaviour
 
         ChangeState(EnemyState.FollowingPlayer);
         currentWanderingTime = 0f;
-        
+
         animator.SetFloat("zSpeed", agent.speed);
     }
 
     private void UpdateFollowingPath()
     {
-        if (!PlayerIsOnRange(detectionDistance)) return;
-        if (PlayerIsOnRange(attackDistance))
+        if (!enemyVision.CheckVisionToPlayer()) return;
+        if (enemyVision.CheckAttackDistance(attackDistance))
         {
             ChangeState(EnemyState.Attack);
         }
@@ -106,19 +108,23 @@ public class EnemyBehavior : MonoBehaviour
             agent.ResetPath();
             ChangeState(EnemyState.FollowingPlayer);
         }
-        
+
         animator.SetFloat("zSpeed", agent.speed);
     }
 
     private void UpdateFollowingPlayer()
     {
         agent.speed = runSpeed;
-        if (PlayerIsOnRange(detectionDistance)) return;
-        ChangeState(EnemyState.Wandering);
+        animator.SetFloat("zSpeed", agent.speed);
+        if (!enemyVision.CheckVisionToPlayer())
+        {
+            ChangeState(EnemyState.Wandering);
+        }
     }
+
     private void UpdateAttack()
     {
-        if (!PlayerIsOnRange(attackDistance))
+        if (!enemyVision.CheckAttackDistance(attackDistance))
         {
             ChangeState(EnemyState.FollowingPlayer);
         }
@@ -130,19 +136,20 @@ public class EnemyBehavior : MonoBehaviour
             {
                 if (Random.Range(0.0f, 1.0f) < strongAttackChance)
                 {
-                    //animacion strong attack
+                    // Animación de ataque fuerte
                 }
                 else
                 {
-                    //animacion normal attack
+                    // Animación de ataque normal
                 }
                 timeNextAttack = timeBetweenAttacks;
             }
         }
     }
+
     private void UpdateJump()
     {
-        if (!PlayerIsOnRange(detectionDistance)) return;
+        if (!enemyVision.CheckVisionToPlayer()) return;
         ChangeState(EnemyState.FollowingPlayer);
     }
 
@@ -156,16 +163,9 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    private bool PlayerIsOnRange(float range)
-    {
-        var sqrDistance = (target.position - transform.position).sqrMagnitude;
-        return sqrDistance <= Mathf.Pow(range, 2);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<ITargeteable>() == null) return;
         target = other.transform;
     }
-
 }
