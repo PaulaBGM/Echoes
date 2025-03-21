@@ -6,6 +6,7 @@ public abstract class BaseHealth: MonoBehaviour, IDamagable
 {
     protected Animator animator;
 
+    [SerializeField] private LifeBarUi lifeBarUI;
     [SerializeField] private float maxLife = 100f;
     [SerializeField] private float damageCooldown;
     private float currentLife = 0f;
@@ -28,14 +29,24 @@ public abstract class BaseHealth: MonoBehaviour, IDamagable
         canTakeDamage = true;
     }
 
-    public void ApplyDamage(float damage) //Hace daño según el golpe recibido.
+    public void ApplyDamage(float damage)
     {
-        if (currentLife >= 0 || !canTakeDamage) return;
+        Debug.Log($"Recibiendo daño: {damage}");
+        Debug.Log($"Vida antes de daño: {currentLife}");
+
+        if (currentLife <= 0 && !canTakeDamage)
+        {
+            Debug.Log("No se puede recibir daño en este momento.");
+            return;
+        }
 
         currentLife -= damage;
+        Debug.Log($"Vida después del daño: {currentLife}");
+        lifeBarUI.UpdateLifeBar(this);
 
-        if(currentLife <= 0)
+        if (currentLife <= 0)
         {
+            Debug.Log("Enemigo muerto.");
             Die();
         }
         else
@@ -49,8 +60,9 @@ public abstract class BaseHealth: MonoBehaviour, IDamagable
         if (currentLife <= 0) return;
 
         currentLife += heal;
+        lifeBarUI.UpdateLifeBar(this);
 
-        if(currentLife>maxLife)
+        if (currentLife>maxLife)
         {
             currentLife = maxLife;
         }

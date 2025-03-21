@@ -15,7 +15,7 @@ public enum EnemyState
 }
 
 [Serializable, RequireComponent(typeof(SphereCollider))]
-public class EnemyBehavior : MonoBehaviour
+public class EnemyBehavior : BaseHealth
 {
     [Header("Current State")]
     [SerializeField] private EnemyState state;
@@ -32,13 +32,14 @@ public class EnemyBehavior : MonoBehaviour
     private float normalSpeed = 3f;
     private float idleSpeed = 0f;
     private NavMeshAgent agent;
-    private Animator animator;
     private float timeNextAttack;
 
     private AIEnemyVision enemyVision;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         agent = GetComponent<NavMeshAgent>();
         aiStates = GetComponents<AIBase>();
         sphereCollider = GetComponent<SphereCollider>();
@@ -51,6 +52,8 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return;
+
         if (state == EnemyState.Wandering)
         {
             UpdateWandering();
@@ -161,6 +164,12 @@ public class EnemyBehavior : MonoBehaviour
         {
             aiStates[i].enabled = i == (int)state;
         }
+    }
+
+    protected override void Die()
+    {
+        isDead = true;
+        animator.SetBool("Dying", true);
     }
 
     private void OnTriggerEnter(Collider other)

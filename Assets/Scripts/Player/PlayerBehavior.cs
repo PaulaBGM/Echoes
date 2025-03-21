@@ -20,7 +20,7 @@ public class PlayerBehavior : BaseHealth, ITargeteable
 
     private void Update()
     {
-        ShootAnimation();
+        //ShootAnimation();
 
         if(getWeapon.hasPistol)
         {

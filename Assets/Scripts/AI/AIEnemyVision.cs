@@ -24,10 +24,7 @@ public class AIEnemyVision : MonoBehaviour
     void Update()
     {
         CheckVisionCone();
-        Debug.Log(CheckVisionToPlayer());
         CheckRaycast();
-        Debug.Log("jugador en radio: " + playerInRadio);
-        Debug.Log("raycast: " + raycastHitChest);
     }
 
     public bool CheckVisionToPlayer()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ShortWeapon
   - LongWeapon
+  - Enemy
   layers:
   - Default
   - TransparentFX
