@@ -31,9 +31,6 @@ public abstract class BaseHealth: MonoBehaviour, IDamagable
 
     public void ApplyDamage(float damage)
     {
-        Debug.Log($"Recibiendo daño: {damage}");
-        Debug.Log($"Vida antes de daño: {currentLife}");
-
         if (currentLife <= 0 && !canTakeDamage)
         {
             Debug.Log("No se puede recibir daño en este momento.");
@@ -41,12 +38,10 @@ public abstract class BaseHealth: MonoBehaviour, IDamagable
         }
 
         currentLife -= damage;
-        Debug.Log($"Vida después del daño: {currentLife}");
         lifeBarUI.UpdateLifeBar(this);
 
         if (currentLife <= 0)
         {
-            Debug.Log("Enemigo muerto.");
             Die();
         }
         else

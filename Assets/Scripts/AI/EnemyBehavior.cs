@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -24,17 +22,17 @@ public class EnemyBehavior : BaseHealth
     [SerializeField] private float detectionDistance;
     [SerializeField] private float attackDistance;
     [SerializeField] private AIBase[] aiStates;
-    [SerializeField] private float timeBetweenAttacks = 2.5f;
-    [SerializeField] private float strongAttackChance = 0.3f;
+    
     [SerializeField] private float wanderingTime = 5f; // Tiempo en segundos antes de cambiar de estado
     private float currentWanderingTime = 0f; // Tiempo transcurrido en estado Wandering
     private float runSpeed = 5f;
     private float normalSpeed = 3f;
     private float idleSpeed = 0f;
     private NavMeshAgent agent;
-    private float timeNextAttack;
 
     private AIEnemyVision enemyVision;
+    private AIAttack enemyAttack;
+    private bool killPlayer;
 
     protected override void Start()
     {
@@ -45,14 +43,14 @@ public class EnemyBehavior : BaseHealth
         sphereCollider = GetComponent<SphereCollider>();
         animator = GetComponent<Animator>();
         enemyVision = GetComponent<AIEnemyVision>();
-
+        enemyAttack = GetComponentInChildren<AIAttack>();
         sphereCollider.radius = detectionDistance;
         state = EnemyState.Wandering;
     }
 
     void Update()
     {
-        if (isDead) return;
+        if (isDead || killPlayer) return;
 
         if (state == EnemyState.Wandering)
         {
@@ -93,6 +91,11 @@ public class EnemyBehavior : BaseHealth
             return;
         }
 
+        if (enemyVision.CheckAttackDistance(attackDistance))
+        {
+            ChangeState(EnemyState.Attack);
+        }
+
         ChangeState(EnemyState.FollowingPlayer);
         currentWanderingTime = 0f;
 
@@ -123,30 +126,26 @@ public class EnemyBehavior : BaseHealth
         {
             ChangeState(EnemyState.Wandering);
         }
+
+        if (enemyVision.CheckAttackDistance(attackDistance))
+        {
+            ChangeState(EnemyState.Attack);
+        }
     }
 
     private void UpdateAttack()
     {
         if (!enemyVision.CheckAttackDistance(attackDistance))
         {
+            agent.isStopped = false; // Permite que el enemigo vuelva a moverse
             ChangeState(EnemyState.FollowingPlayer);
         }
         else
         {
-            transform.LookAt(target.position);
-            timeNextAttack -= Time.deltaTime;
-            if (timeNextAttack <= 0)
-            {
-                if (Random.Range(0.0f, 1.0f) < strongAttackChance)
-                {
-                    // Animación de ataque fuerte
-                }
-                else
-                {
-                    // Animación de ataque normal
-                }
-                timeNextAttack = timeBetweenAttacks;
-            }
+            agent.isStopped = true; // Detiene el movimiento al atacar
+            agent.velocity = Vector3.zero;
+            animator.SetFloat("zSpeed", 0); // Evita que se active la animaciÃ³n de caminar/correr
+            enemyAttack.AttackTimer(target, animator);
         }
     }
 
@@ -176,5 +175,11 @@ public class EnemyBehavior : BaseHealth
     {
         if (other.GetComponent<ITargeteable>() == null) return;
         target = other.transform;
+
+        if(other.GetComponent<PlayerBehavior>().IsDead)
+        {
+            killPlayer = true;
+            animator.SetBool("KillPlayer", true);
+        }
     }
 }
