@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public class WeaponController : Weapon
 {
     [SerializeField] private AimStateManager aimState;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shootSpawn;
-    [SerializeField] private float fireRate;
+    [SerializeField] private float baseFireRate = 0.2f; // Tiempo base entre disparos
+    [SerializeField] private float pistolFireRateMultiplier = 2f; // La pistola tarda el doble
     private float lastShootTime = 0f;
 
     [Header("Camera")]
@@ -18,43 +19,46 @@ public class WeaponController : MonoBehaviour
 
     public bool isShooting = false;
     public bool isAiming = false;
-
-    public enum ShootMode { Single, Auto }
-    public ShootMode currentShootMode = ShootMode.Auto; // Puedes cambiar a Single si lo deseas
-
     private Coroutine shootingCoroutine = null;
+    private AmmunitionManager ammoManager;
+
+    public WeaponType currentWeapon = WeaponType.Long; // Tipo de arma actual
+
+    private void Start()
+    {
+        ammoManager = GetComponentInParent<AmmunitionManager>();
+    }
 
     void Update()
     {
-        Debug.Log("TIEMPO DISAPRO: " + lastShootTime);
+        HandleShooting();
+        HandleAiming();
+        AlignShootSpawnWithCamera();
+    }
 
-        // *** DISPARO ***
-        if (Input.GetMouseButton(0))
+    void HandleShooting()
+    {
+        float actualFireRate = baseFireRate * (currentWeapon == WeaponType.Short ? pistolFireRateMultiplier : 1f);
+
+        if (Input.GetMouseButton(0)) // Si el botón del ratón está presionado
         {
-            isShooting = true;
-
-            if (currentShootMode == ShootMode.Single)
+            if (Time.time - lastShootTime >= actualFireRate) // Solo disparar si ha pasado el tiempo suficiente
             {
-                Shoot();
-            }
-            else if (currentShootMode == ShootMode.Auto && shootingCoroutine == null)
-            {
-                shootingCoroutine = StartCoroutine(FireCoroutine());
+                TryShoot();
             }
         }
-
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonDown(0)) // Si se hace clic una vez más
         {
-            isShooting = false;
-            if (shootingCoroutine != null)
+            if (Time.time - lastShootTime >= actualFireRate) // Solo disparar si ha pasado el tiempo suficiente
             {
-                StopCoroutine(shootingCoroutine);
-                shootingCoroutine = null;
+                TryShoot();
             }
         }
+    }
 
-        // *** APUNTADO ***
-        if (Input.GetMouseButton(1)) // Se mantiene mientras el botón derecho esté presionado
+    void HandleAiming()
+    {
+        if (Input.GetMouseButton(1))
         {
             isAiming = true;
             aimState.camFollowPos = camFollowPos_Pistol;
@@ -62,7 +66,7 @@ public class WeaponController : MonoBehaviour
             pistolCamera.SetActive(true);
             normalCamera.SetActive(false);
         }
-        else // Cuando se suelta, vuelve a la cámara normal
+        else
         {
             isAiming = false;
             aimState.camFollowPos = camFollowPos_Normal;
@@ -70,51 +74,52 @@ public class WeaponController : MonoBehaviour
             pistolCamera.SetActive(false);
             normalCamera.SetActive(true);
         }
-
-        // Asegurar que la posición de disparo siga la dirección de la mira
-        AlignShootSpawnWithCamera();
     }
 
     void AlignShootSpawnWithCamera()
     {
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         Vector3 targetPoint;
+        int enemyLayer = LayerMask.NameToLayer("Enemy_Detector");
+        int layerMask = ~(1 << enemyLayer);
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
-            targetPoint = hit.point; // Punto donde impacta el raycast
+            targetPoint = hit.point;
+            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
         }
         else
         {
-            targetPoint = ray.origin + ray.direction * 1000f; // Punto lejano si no impacta
+            targetPoint = ray.origin + ray.direction * 1000f;
+            Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.green);
         }
+
+        Debug.DrawLine(shootSpawn.position, targetPoint, Color.blue);
 
         Vector3 shootDirection = (targetPoint - shootSpawn.position).normalized;
         shootSpawn.rotation = Quaternion.LookRotation(shootDirection);
     }
 
-    void Shoot()
+    void TryShoot()
     {
-        if (Time.time - lastShootTime >= fireRate)
+        if (ammoManager.UseAmmo(1)) // Asegúrate de que hay munición
         {
             InstantiateBullet();
-            lastShootTime = Time.time;
-            isShooting = false;
+            lastShootTime = Time.time; // Actualiza el tiempo del último disparo
         }
-    }
-
-    IEnumerator FireCoroutine()
-    {
-        while (isShooting)
+        else
         {
-            Shoot();
-            yield return new WaitForSeconds(fireRate);
-            isShooting = false;
+            Debug.Log("No hay munición");
         }
     }
 
     void InstantiateBullet()
     {
         Instantiate(bulletPrefab, shootSpawn.position, shootSpawn.rotation);
+    }
+
+    public void SetWeaponType(WeaponType weapon)
+    {
+        currentWeapon = weapon;
     }
 }

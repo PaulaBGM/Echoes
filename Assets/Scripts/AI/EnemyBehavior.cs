@@ -17,6 +17,7 @@ public class EnemyBehavior : BaseHealth
 {
     [Header("Current State")]
     [SerializeField] private EnemyState state;
+    [SerializeField] private GameObject colliderShoot; //Collider que detecta los disparos
     [field: SerializeField] public Transform target { get; private set; }
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private float detectionDistance;
@@ -46,12 +47,11 @@ public class EnemyBehavior : BaseHealth
         enemyAttack = GetComponentInChildren<AIAttack>();
         sphereCollider.radius = detectionDistance;
         state = EnemyState.Wandering;
+        colliderShoot.SetActive(true);
     }
 
     void Update()
     {
-        if (isDead || killPlayer) return;
-
         if (state == EnemyState.Wandering)
         {
             UpdateWandering();
@@ -168,7 +168,15 @@ public class EnemyBehavior : BaseHealth
     protected override void Die()
     {
         isDead = true;
-        animator.SetBool("Dying", true);
+        animator.SetTrigger("Dying");
+        agent.speed = 0;  // Establece la velocidad a 0
+        agent.isStopped = true;  // Detén el agente
+        colliderShoot.SetActive(false);
+    }
+
+    public void DestroyEnemy()
+    {
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -39,11 +39,11 @@ public class AmmunitionCharger : PowerUpBase
 
     protected override void ApplyEffect(GameObject player)
     {
-        PlayerBehavior playerAmmunition = player.GetComponent<PlayerBehavior>();
+        AmmunitionManager ammunitionManager = player.GetComponent<AmmunitionManager>();
 
-        if (playerAmmunition != null)
+        if (ammunitionManager != null)
         {
-            playerAmmunition.AmunnitionRecharge(ammunitionAmount);
+            ammunitionManager.RechargeAmmo(ammunitionAmount);
         }
     }
 }

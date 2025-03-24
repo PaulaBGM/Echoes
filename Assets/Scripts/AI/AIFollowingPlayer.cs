@@ -13,6 +13,8 @@ public class AIFollowingPlayer : AIBase
     }
     void Update()
     {
+        if (enemyBehavior.IsDead) return;
+
         agent.SetDestination(enemyBehavior.target.position);
     }
 }

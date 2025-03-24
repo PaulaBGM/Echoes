@@ -17,6 +17,8 @@ public class AIFollowingPath : AIBase
 
     private void Update()
     {
+        if (enemyBehavior.IsDead) return;
+
         agent.speed = 3f;
         anim.SetFloat("zSpeed", agent.speed);
         if (agent.remainingDistance < stopDistance && !agent.pathPending) 

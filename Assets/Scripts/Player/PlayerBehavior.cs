@@ -9,7 +9,6 @@ public class PlayerBehavior : BaseHealth, ITargeteable
     [SerializeField] private WeaponController longWeaponController, shortWeaponController;
     [SerializeField] private float delayOpenGameOver;
     [SerializeField] private GameObject gameOverMenu;
-    [SerializeField] private AmmunitionBarUI ammunitionBarUI;
     private GetWeapon getWeapon;
     public Transform chestBone;
 
@@ -17,15 +16,9 @@ public class PlayerBehavior : BaseHealth, ITargeteable
     public delegate void OnGameOverHandler();
     public static event OnGameOverHandler OnGameOver;
 
-    [SerializeField] private int maxAmmunition;
-    private int currentAmmunition;
-    public float CurrentAmmunition { get => currentAmmunition; }
-    public float MaxAmmunition { get => maxAmmunition; }
-
     protected override void Start()
     {
         base.Start();
-
         playerMove = GetComponent<PlayerMove>();
         getWeapon = GetComponent<GetWeapon>();
     }
@@ -70,18 +63,5 @@ public class PlayerBehavior : BaseHealth, ITargeteable
 
         // Dispara el evento de "Game Over" para que la UI lo gestione
         OnGameOver?.Invoke();
-    }
-
-    public void AmunnitionRecharge(int amount)
-    {
-        if (currentAmmunition <= 0) return;
-
-        currentAmmunition += amount;
-        ammunitionBarUI.UpdateAmmunitionBar(this);
-
-        if (currentAmmunition > maxAmmunition)
-        {
-            currentAmmunition = maxAmmunition;
-        }
     }
 }

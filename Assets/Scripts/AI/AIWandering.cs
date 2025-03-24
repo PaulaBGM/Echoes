@@ -19,7 +19,7 @@ public class AIWandering : AIBase
 
     void Update()
     {
-        if (!agent.enabled || isWaiting) return;
+        if (!agent.enabled || isWaiting || enemyBehavior.IsDead) return;
         
     }
 

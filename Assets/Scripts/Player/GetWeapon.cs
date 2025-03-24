@@ -5,36 +5,36 @@ using UnityEngine;
 public class GetWeapon : MonoBehaviour
 {
     private PlayerBehavior playerBehavior;
-    private Weapon currentWeapon; // Referencia al arma cercana
+    private WeaponController weaponController; // Para manejar las armas recogidas
+    private Weapon nearbyWeapon; // Para detectar armas en el suelo
 
-    [SerializeField] private float waitForAnim = 0.4f; // Tiempo de espera para la animación de cambio de arma
-    [SerializeField] private GameObject[] weaponObjects; // Armas asignadas en el Inspector
-    [SerializeField] private GameObject backWeaponObject; // Objeto que representa el arma en la espalda
+    [SerializeField] private float waitForAnim = 0.4f;
+    [SerializeField] private GameObject[] weaponObjects;
+    [SerializeField] private GameObject backWeaponObject;
 
     private Dictionary<WeaponType, GameObject> weaponDictionary = new Dictionary<WeaponType, GameObject>();
-    private List<WeaponType> collectedWeapons = new List<WeaponType>(); // Lista de armas recogidas
-    private int currentWeaponIndex = 0; // Índice del arma actualmente activa
+    private List<WeaponType> collectedWeapons = new List<WeaponType>();
+    private int currentWeaponIndex = 0;
 
     private bool isNearWeapon = false;
-    public bool hasPistol; // Variable para saber si se tiene una pistola
-    private bool isSwitchingWeapon = false; // Para evitar cambiar de arma rápidamente
-    private bool hasLargeWeapon = false; // Para controlar si el jugador tiene el arma grande
+    public bool hasPistol;
+    private bool isSwitchingWeapon = false;
+    private bool hasLargeWeapon = false;
 
-    // Declaramos la variable currentWeaponType
-    private WeaponType currentWeaponType; // Esto es necesario para hacer referencia al arma activa
+    private WeaponType currentWeaponType;
 
     private void Start()
     {
         playerBehavior = GetComponent<PlayerBehavior>();
+        weaponController = GetComponentInChildren<WeaponController>(); // Maneja armas equipadas
 
-        // Llenar el diccionario dinámicamente sin depender del orden
         weaponDictionary.Clear();
         foreach (var weaponObj in weaponObjects)
         {
             if (weaponObj.TryGetComponent<Weapon>(out Weapon weaponComponent))
             {
                 weaponDictionary[weaponComponent.weaponType] = weaponObj;
-                weaponObj.SetActive(false); // Desactivar todas al inicio
+                weaponObj.SetActive(false);
             }
         }
 
@@ -43,7 +43,6 @@ public class GetWeapon : MonoBehaviour
             Debug.LogError("No hay armas correctamente asignadas en el array weaponObjects.");
         }
 
-        // Asegúrate de que el arma en la espalda esté desactivada al principio
         if (backWeaponObject != null)
         {
             backWeaponObject.SetActive(false);
@@ -52,110 +51,92 @@ public class GetWeapon : MonoBehaviour
 
     private void Update()
     {
-        // Recoger un arma cuando el jugador está cerca y presiona F
+        // Recoger arma si estamos cerca y presionamos F
         if (isNearWeapon && Input.GetKeyDown(KeyCode.F))
         {
-            if (currentWeapon != null)
+            if (nearbyWeapon != null)
             {
-                if (!collectedWeapons.Contains(currentWeapon.weaponType))
+                WeaponType weaponType = nearbyWeapon.weaponType;
+                if (!collectedWeapons.Contains(weaponType))
                 {
-                    collectedWeapons.Add(currentWeapon.weaponType); // Agregar arma recogida
+                    collectedWeapons.Add(weaponType);
                 }
 
-                // Activar la animación de recoger arma
                 playerBehavior.Animator.SetBool("pickUp", true);
-
-                ActivateWeapon(currentWeapon.weaponType);
-                currentWeapon.DestroyWeapon();
+                ActivateWeapon(weaponType);
+                Destroy(nearbyWeapon.gameObject); // Eliminar el arma del suelo
             }
         }
 
-        // Cambio de arma con la rueda del mouse, pero solo si no estamos cambiando de arma
-        if (collectedWeapons.Count > 1 && !isSwitchingWeapon) // Solo cambiar si hay al menos 2 armas y no estamos en medio de un cambio
+        if (collectedWeapons.Count > 1 && !isSwitchingWeapon)
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
-                StartCoroutine(SwitchWeaponCoroutine(1)); // Cambiar al siguiente arma
+                StartCoroutine(SwitchWeaponCoroutine(1));
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
-                StartCoroutine(SwitchWeaponCoroutine(-1)); // Cambiar al arma anterior
+                StartCoroutine(SwitchWeaponCoroutine(-1));
             }
         }
     }
 
     private void ActivateWeapon(WeaponType type)
     {
-        if (!collectedWeapons.Contains(type)) return; // No activar si no se recogió
+        if (!collectedWeapons.Contains(type)) return;
 
-        // Desactivar todas antes de activar la nueva
         foreach (var weapon in weaponDictionary.Values)
         {
             weapon.SetActive(false);
         }
 
-        // Activar solo el arma seleccionada
         if (weaponDictionary.TryGetValue(type, out GameObject weaponToActivate))
         {
-            // Si se selecciona un arma pequeña, guarda el arma grande en la espalda si ya se ha recogido el arma grande
             if (type == WeaponType.Short)
             {
-                // Si el jugador ya tiene el arma grande, activamos el arma de la espalda
                 if (hasLargeWeapon && backWeaponObject != null)
                 {
-                    backWeaponObject.SetActive(true); // Activar el arma en la espalda
+                    backWeaponObject.SetActive(true);
                 }
-                hasPistol = true; // El jugador tiene ahora un arma pequeña (pistola)
+                hasPistol = true;
             }
             else if (type == WeaponType.Long)
             {
-                // Si se selecciona el arma grande, desactivar el arma de la espalda
                 if (hasLargeWeapon && backWeaponObject != null)
                 {
-                    backWeaponObject.SetActive(false); // Desactivar el arma en la espalda
+                    backWeaponObject.SetActive(false);
                 }
-                hasLargeWeapon = true; // El jugador tiene el arma grande
+                hasLargeWeapon = true;
             }
 
-            // Activar el arma seleccionada en las manos
             weaponToActivate.SetActive(true);
-            currentWeaponType = type; // Establecer el arma activa
+            currentWeaponType = type;
+            currentWeaponIndex = collectedWeapons.IndexOf(type);
 
-            currentWeaponIndex = collectedWeapons.IndexOf(type); // Actualizar el índice
-
-            // Actualizar animaciones
             playerBehavior.Animator.SetBool("longWeapon", type == WeaponType.Long);
             playerBehavior.Animator.SetBool("shortWeapon", type == WeaponType.Short);
+
+            if (weaponController != null)
+            {
+                weaponController.SetWeaponType(type);
+            }
         }
     }
 
-    // Coroutine para cambiar el arma
     private IEnumerator SwitchWeaponCoroutine(int direction)
     {
-        // Si ya estamos cambiando de arma, no hacemos nada más
         if (isSwitchingWeapon)
             yield break;
 
-        // Deshabilitar la capacidad de cambiar de arma hasta que la animación haya terminado
         isSwitchingWeapon = true;
-
-        // Activar la animación de cambio de arma
         playerBehavior.Animator.SetBool("switchWeapon", true);
+        yield return new WaitForSeconds(waitForAnim);
 
-        // Esperar un tiempo para asegurar que la animación se vea
-        yield return new WaitForSeconds(waitForAnim); // Ajusta el tiempo según la duración de la animación
-
-        // Cambiar el arma después de la animación
         currentWeaponIndex = (currentWeaponIndex + direction + collectedWeapons.Count) % collectedWeapons.Count;
         ActivateWeapon(collectedWeapons[currentWeaponIndex]);
 
-        // Esperar un poco más para que la animación de cambio de arma termine correctamente
-        yield return new WaitForSeconds(0.1f); // Este pequeño delay da tiempo a que se inicie la nueva animación
-
-        // Desactivar la animación de cambio de arma
+        yield return new WaitForSeconds(0.1f);
         playerBehavior.Animator.SetBool("switchWeapon", false);
-
-        // Volver a permitir cambios de arma
         isSwitchingWeapon = false;
     }
 
@@ -164,17 +145,17 @@ public class GetWeapon : MonoBehaviour
         if (other.gameObject.TryGetComponent<Weapon>(out Weapon weapon))
         {
             Debug.Log("PRESIONA F para recoger el arma");
-            currentWeapon = weapon;
+            nearbyWeapon = weapon;
             isNearWeapon = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == currentWeapon?.gameObject)
+        if (other.gameObject == nearbyWeapon?.gameObject)
         {
             isNearWeapon = false;
-            currentWeapon = null;
+            nearbyWeapon = null;
         }
     }
 }

@@ -14,8 +14,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Enemy_Detector
+  - Enemy_ColliderBullets
   - 
   - 
   - 
