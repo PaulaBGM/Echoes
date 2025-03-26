@@ -145,7 +145,7 @@ public class EnemyBehavior : BaseHealth
             agent.isStopped = true; // Detiene el movimiento al atacar
             agent.velocity = Vector3.zero;
             animator.SetFloat("zSpeed", 0); // Evita que se active la animación de caminar/correr
-            enemyAttack.AttackTimer(target, animator);
+            enemyAttack.AttackTimer(target);
         }
     }
 
