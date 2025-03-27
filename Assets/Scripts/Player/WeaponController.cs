@@ -62,6 +62,7 @@ public class WeaponController : Weapon
         {
             isAiming = true;
             aimState.camFollowPos = camFollowPos_Pistol;
+            aimState.ShootCamera();
             crosshairImage.SetActive(true);
             pistolCamera.SetActive(true);
             normalCamera.SetActive(false);
@@ -70,6 +71,7 @@ public class WeaponController : Weapon
         {
             isAiming = false;
             aimState.camFollowPos = camFollowPos_Normal;
+            aimState.NormalCamera();
             crosshairImage.SetActive(false);
             pistolCamera.SetActive(false);
             normalCamera.SetActive(true);

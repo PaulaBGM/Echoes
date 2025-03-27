@@ -30,12 +30,33 @@ public class AimStateManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Suavizar la rotación en el eje Y (vertical)
-        currentYRotation = Mathf.LerpAngle(currentYRotation, yAxis.Value, Time.deltaTime * smoothSpeed);
-        camFollowPos.localEulerAngles = new Vector3(currentYRotation, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
+        SmoothRotate(camFollowPos, xAxis, yAxis);
+    }
+    public void ShootCamera() 
+    {
+        yAxis.m_MinValue = -11f;
+        yAxis.m_MaxValue = 3f;
+    }
+    public void NormalCamera()
+    {
+        yAxis.m_MinValue = -15f;
+        yAxis.m_MaxValue = 15f;
+    }
+    private void SmoothRotate(Transform location, AxisState x, AxisState y)
+    {
+        // Obtener los valores interpolados suavemente
+        float targetYRotation = Mathf.LerpAngle(currentYRotation, y.Value, Time.deltaTime * smoothSpeed);
+        float targetXRotation = Mathf.LerpAngle(currentXRotation, x.Value, Time.deltaTime * smoothSpeed);
 
-        // Suavizar la rotación en el eje X (horizontal)
-        currentXRotation = Mathf.LerpAngle(currentXRotation, xAxis.Value, Time.deltaTime * smoothSpeed);
+        // Clampear el valor interpolado para evitar sobrepasar los límites
+        targetYRotation = Mathf.Clamp(targetYRotation, yAxis.m_MinValue, yAxis.m_MaxValue);
+
+        // Aplicar la rotación suavizada
+        currentYRotation = targetYRotation;
+        location.localEulerAngles = new Vector3(currentYRotation, location.localEulerAngles.y, location.localEulerAngles.z);
+
+        currentXRotation = targetXRotation;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentXRotation, transform.eulerAngles.z);
     }
+
 }

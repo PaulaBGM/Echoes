@@ -4907,6 +4907,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: camFollowPistol
+      value: 
+      objectReference: {fileID: 2043581112}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: xAxisShoot.m_Wrap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: yAxisShoot.m_MaxValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: yAxisShoot.m_MinValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: yAxisShoot.m_InvertInput
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: xAxisShoot.m_InputAxisName
+      value: Mouse X
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: yAxisShoot.m_InputAxisName
+      value: Mouse Y
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 19921735745674254, guid: d031a506946b06d409f004193857ab86, type: 3}
     m_RemovedGameObjects: []
