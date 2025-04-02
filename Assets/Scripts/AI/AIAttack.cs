@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIAttack : AIBase
+public class AIAttack : MonoBehaviour
 {
     [SerializeField] private Transform[] repositionPoints;
     [SerializeField] private float timeBetweenAttacks = 2.5f;
@@ -11,11 +11,10 @@ public class AIAttack : AIBase
 
     public bool isAttacking = false;
     private float timeNextAttack;
+    private Animator animatorEnemy;
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-
         timeNextAttack = timeBetweenAttacks;
     }
 
@@ -24,8 +23,9 @@ public class AIAttack : AIBase
         
     }
 
-    public void AttackTimer(Transform target)
+    public void AttackTimer(Transform target, Animator animator)
     {
+        animatorEnemy = animator;
         transform.LookAt(target.position);
         timeNextAttack -= Time.deltaTime;
         if (timeNextAttack <= 0)
@@ -38,7 +38,7 @@ public class AIAttack : AIBase
             }
             else
             {
-                anim.SetBool("NormalAttack", true);
+                animator.SetBool("NormalAttack", true);
             }
             timeNextAttack = timeBetweenAttacks;
         }
@@ -47,7 +47,7 @@ public class AIAttack : AIBase
     // Método llamado por el evento de la animación al final
     public void ResetAttack()
     {
-        anim.SetBool("NormalAttack", false);
+        animatorEnemy.SetBool("NormalAttack", false);
         isAttacking = false;
         //RepositionForAttack();
     }
