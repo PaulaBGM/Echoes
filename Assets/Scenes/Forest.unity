@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 266997618}
   - component: {fileID: 266997617}
   m_Layer: 0
-  m_Name: Terrain_(0.00, 0.00, 40.00)
+  m_Name: Terrain_(0.00, 0.00, 30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 266997615}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 40}
+  m_LocalPosition: {x: 0, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 276666819}
   - component: {fileID: 276666818}
   m_Layer: 0
-  m_Name: Terrain_(80.00, 0.00, -40.00)
+  m_Name: Terrain_(60.00, 0.00, -30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 276666816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 80, y: 0, z: -40}
+  m_LocalPosition: {x: 60, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 453543021}
   - component: {fileID: 453543020}
   m_Layer: 0
-  m_Name: Terrain_(-40.00, 0.00, 40.00)
+  m_Name: Terrain_(-30.00, 0.00, 30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,7 +381,7 @@ Transform:
   m_GameObject: {fileID: 453543018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40, y: 0, z: 40}
+  m_LocalPosition: {x: -30, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 594026517}
   - component: {fileID: 594026516}
   m_Layer: 0
-  m_Name: Terrain_(40.00, 0.00, -40.00)
+  m_Name: Terrain_(30.00, 0.00, -30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,7 +473,7 @@ Transform:
   m_GameObject: {fileID: 594026514}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40, y: 0, z: -40}
+  m_LocalPosition: {x: 30, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 838100036}
   - component: {fileID: 838100035}
   m_Layer: 0
-  m_Name: Terrain_(80.00, 0.00, 0.00)
+  m_Name: Terrain_(60.00, 0.00, 0.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -813,7 +813,7 @@ Transform:
   m_GameObject: {fileID: 838100033}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 80, y: 0, z: 0}
+  m_LocalPosition: {x: 60, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -890,7 +890,7 @@ GameObject:
   - component: {fileID: 993789767}
   - component: {fileID: 993789766}
   m_Layer: 0
-  m_Name: Terrain_(-80.00, 0.00, 40.00)
+  m_Name: Terrain_(-60.00, 0.00, 30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +905,7 @@ Transform:
   m_GameObject: {fileID: 993789764}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -80, y: 0, z: 40}
+  m_LocalPosition: {x: -60, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -982,7 +982,7 @@ GameObject:
   - component: {fileID: 1073249754}
   - component: {fileID: 1073249753}
   m_Layer: 0
-  m_Name: Terrain_(40.00, 0.00, 0.00)
+  m_Name: Terrain_(30.00, 0.00, 0.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,7 +997,7 @@ Transform:
   m_GameObject: {fileID: 1073249751}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1147,7 +1147,7 @@ GameObject:
   - component: {fileID: 1307084621}
   - component: {fileID: 1307084620}
   m_Layer: 0
-  m_Name: Terrain_(-80.00, 0.00, -40.00)
+  m_Name: Terrain_(-60.00, 0.00, -30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,7 +1162,7 @@ Transform:
   m_GameObject: {fileID: 1307084618}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -80, y: 0, z: -40}
+  m_LocalPosition: {x: -60, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1238,17 +1238,17 @@ PrefabInstance:
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.3
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.4
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8,
         type: 3}
@@ -1258,7 +1258,7 @@ PrefabInstance:
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.8
+      value: 13.6
       objectReference: {fileID: 0}
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8,
         type: 3}
@@ -1317,7 +1317,7 @@ GameObject:
   - component: {fileID: 1559804589}
   - component: {fileID: 1559804588}
   m_Layer: 0
-  m_Name: Terrain_(40.00, 0.00, 40.00)
+  m_Name: Terrain_(30.00, 0.00, 30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1332,7 +1332,7 @@ Transform:
   m_GameObject: {fileID: 1559804586}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40, y: 0, z: 40}
+  m_LocalPosition: {x: 30, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 1596728965}
   - component: {fileID: 1596728964}
   m_Layer: 0
-  m_Name: Terrain_(-80.00, 0.00, 0.00)
+  m_Name: Terrain_(-60.00, 0.00, 0.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1424,7 +1424,7 @@ Transform:
   m_GameObject: {fileID: 1596728962}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -80, y: 0, z: 0}
+  m_LocalPosition: {x: -60, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1501,7 +1501,7 @@ GameObject:
   - component: {fileID: 1614190540}
   - component: {fileID: 1614190539}
   m_Layer: 0
-  m_Name: Terrain_(0.00, 0.00, -40.00)
+  m_Name: Terrain_(0.00, 0.00, -30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1516,7 +1516,7 @@ Transform:
   m_GameObject: {fileID: 1614190537}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -40}
+  m_LocalPosition: {x: 0, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 1619821977}
   - component: {fileID: 1619821976}
   m_Layer: 0
-  m_Name: Terrain_(-40.00, 0.00, 0.00)
+  m_Name: Terrain_(-30.00, 0.00, 0.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1608,7 +1608,7 @@ Transform:
   m_GameObject: {fileID: 1619821974}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40, y: 0, z: 0}
+  m_LocalPosition: {x: -30, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1777,7 +1777,7 @@ GameObject:
   - component: {fileID: 2030198700}
   - component: {fileID: 2030198699}
   m_Layer: 0
-  m_Name: Terrain_(-40.00, 0.00, -40.00)
+  m_Name: Terrain_(-30.00, 0.00, -30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1792,7 +1792,7 @@ Transform:
   m_GameObject: {fileID: 2030198697}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40, y: 0, z: -40}
+  m_LocalPosition: {x: -30, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1869,7 +1869,7 @@ GameObject:
   - component: {fileID: 2124634854}
   - component: {fileID: 2124634853}
   m_Layer: 0
-  m_Name: Terrain_(80.00, 0.00, 40.00)
+  m_Name: Terrain_(60.00, 0.00, 30.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1884,7 +1884,7 @@ Transform:
   m_GameObject: {fileID: 2124634851}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 80, y: 0, z: 40}
+  m_LocalPosition: {x: 60, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
