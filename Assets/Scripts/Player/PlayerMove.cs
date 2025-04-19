@@ -23,6 +23,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float timeBetweenJump = 0.5f;
     [SerializeField] private float initialJumpAnimTime;
 
+    [Header("Slide")]
+    [SerializeField] private AnimationCurve slideSlowCurve;
+    [SerializeField] private float slideSlope = 4f;
+    [SerializeField] private float slideSpeed = 3f;
+    [SerializeField] private float maxSlideVelocity = 6f;
+    [SerializeField] private float slideDownTime = 3f;
+
     [Header("Crouched")]
     [SerializeField] private float crouchSpeed = 1f;
     [SerializeField] private float standHeight = 2f; // Altura de la cápsula cuando está de pie.
@@ -53,6 +60,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float dashSpeed = 7f;
     [SerializeField] private float dashEndSpeed = 1f;
     private Vector3 dashDirection;
+
+    private Vector3 slideVelocity;
+    private float slidenTime = 0f;
+    private float slideVelocityFactor = 1f;
+    private bool sliding = false;
 
     //Variables de números enteros
     private static readonly int Jump = Animator.StringToHash("jump");
@@ -87,6 +99,7 @@ public class PlayerMove : MonoBehaviour
 
         UpdatePlayerVelocity();
         DoJump();
+        UpdateSlideVelocity();
         ApplyVelocity();
 
         HandleCrouch();
@@ -125,7 +138,7 @@ public class PlayerMove : MonoBehaviour
 
     private void ApplyVelocity()
     {
-        Vector3 totalVelocity = playerVelocity + verticalVelocity * Vector3.up;
+        Vector3 totalVelocity = (playerVelocity + slideVelocity) * slideVelocityFactor + Vector3.up * verticalVelocity; ;
          
         ch_Controller.Move(totalVelocity * Time.deltaTime); 
     }
@@ -231,6 +244,60 @@ public class PlayerMove : MonoBehaviour
         playerBehavior.Animator.SetInteger(Jump, 2); // Activa la animación de salto
         isJumping = false;
         waitingForJumpAnim = false;
+    }
+
+    void UpdateSlideVelocity()
+    {
+        Vector3 maxSlideVelocity = Vector3.zero;
+
+        RaycastHit hitInfo;
+
+        if (ch_Controller.isGrounded && Physics.Raycast(transform.position, Vector3.down, out hitInfo, ch_Controller.height))
+        {
+            float angle = Vector3.Angle(hitInfo.normal, Vector3.up); //Ángulo entre la normal del HitInfo y el Vector.up.
+
+            if (angle > slideSlope)
+            {
+                sliding = true;
+
+                Vector3 slideDirection = Vector3.ProjectOnPlane(Vector3.down, hitInfo.normal).normalized; //Dirección del slide proyectado en un plano.
+
+                //REVISAR YA QUE NO SE CAE POR LA PENDIENTE
+                maxSlideVelocity = slideDirection * slideSpeed;
+
+                Debug.DrawRay(hitInfo.point, hitInfo.normal, Color.red, 3);
+                Debug.DrawRay(hitInfo.point, slideDirection, Color.blue, 3);
+            }
+            else
+            {
+                sliding = false;
+                slidenTime = 0;
+            }
+        }
+
+        if (sliding)
+        {
+            slidenTime += Time.deltaTime;
+        }
+
+        /// <summary>
+        /// Calcula la velocidad del deslizamiento dependiendo de si el personaje está deslizándose o no.
+        /// (?) Si está deslizándose, interpolar la velocidad hacia la velocidad máxima con un factor de suavizado.
+        /// (:) Si no está deslizándose, reducir gradualmente la velocidad hasta detenerse (Vector3.zero).
+        /// </summary>
+
+        slideVelocity = sliding
+            ? Vector3.Lerp(slideVelocity, maxSlideVelocity, Time.deltaTime * 3)
+            : Vector3.Lerp(slideVelocity, Vector3.zero, Time.deltaTime * 5);
+
+        /// <summary>
+        /// Ralentizar el movimiento tras alcanzar la velocidad máxima.
+        /// (?) Si está deslizándose, usar una curva de desaceleración para ajustar la velocidad en función del tiempo de deslizamiento.
+        /// (:) Si no está deslizándose, suavizar el factor de velocidad de vuelta a 1 con interpolación lineal.
+        /// </summary>
+        slideVelocityFactor = sliding
+            ? slideSlowCurve.Evaluate(Mathf.Clamp01(slidenTime / slideDownTime))
+            : Mathf.Lerp(slideVelocityFactor, 1, 10 * Time.deltaTime);
     }
 
     private void StartCrouch()

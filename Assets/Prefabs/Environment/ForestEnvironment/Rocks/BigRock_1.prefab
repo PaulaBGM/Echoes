@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 677324816273912089}
   - component: {fileID: 677324816272946137}
   - component: {fileID: 2128448379902396465}
-  - component: {fileID: 198013579419507310}
+  - component: {fileID: 2813948723339137203}
   m_Layer: 0
   m_Name: BigRock_1
   m_TagString: Untagged
@@ -112,8 +112,8 @@ LODGroup:
     renderers:
     - renderer: {fileID: 677324816272946137}
   m_Enabled: 1
---- !u!64 &198013579419507310
-MeshCollider:
+--- !u!136 &2813948723339137203
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -130,7 +130,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 6ff6b189e83a33148b368b8e8285b94c, type: 3}
+  serializedVersion: 2
+  m_Radius: 1.5805582
+  m_Height: 3.823493
+  m_Direction: 1
+  m_Center: {x: -0.07813287, y: 0.22235012, z: -0.09993929}
