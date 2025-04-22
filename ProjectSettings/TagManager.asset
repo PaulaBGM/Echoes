@@ -7,6 +7,8 @@ TagManager:
   - ShortWeapon
   - LongWeapon
   - Enemy
+  - TargetFront
+  - TargetBack
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - UI
   - Enemy_Detector
   - Enemy_ColliderBullets
-  - 
-  - 
+  - Bullets
+  - Weapons
   - 
   - 
   - 

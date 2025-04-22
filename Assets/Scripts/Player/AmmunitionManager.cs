@@ -20,7 +20,6 @@ public class AmmunitionManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("CURRENT AMMUNITION: " + currentAmmunition);
     }
 
     // Método para restar munición
