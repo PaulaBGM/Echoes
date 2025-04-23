@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 6464042502976545236}
   - component: {fileID: 4977080123515909280}
   - component: {fileID: 6173470846729388558}
+  - component: {fileID: 5473055311297596621}
   m_Layer: 0
   m_Name: Tree_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6464042502976545236
 Transform:
@@ -80,6 +81,22 @@ CapsuleCollider:
   m_Height: 2.69
   m_Direction: 1
   m_Center: {x: 0.12, y: 1.11, z: 0}
+--- !u!208 &5473055311297596621
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359530885335178052}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1.27, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.13, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3133787656161886426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,6 +108,18 @@ PrefabInstance:
     - target: {fileID: 100644, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
       propertyPath: m_Name
       value: Tree_3_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100644, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 100648, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 100650, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400644, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
       propertyPath: m_RootOrder

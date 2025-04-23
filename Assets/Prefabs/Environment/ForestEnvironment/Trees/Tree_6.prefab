@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 6752551473966630959}
   - component: {fileID: 7078330024098905464}
   - component: {fileID: -9198849436485102782}
+  - component: {fileID: 4079180384519266606}
   m_Layer: 0
   m_Name: Tree_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6752551473966630959
 Transform:
@@ -104,6 +105,22 @@ CapsuleCollider:
   m_Height: 4.1
   m_Direction: 1
   m_Center: {x: 0, y: 1.55, z: 0}
+--- !u!208 &4079180384519266606
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752551473966630956}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.58, y: 1.735, z: 0.58}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.28, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &296474370887536631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,6 +132,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_Name
       value: Ivy_1_3 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_RootOrder
@@ -192,6 +213,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 1e4785208444f064f9bbd5dd11864b86, type: 3}
       propertyPath: m_Name
       value: '5_Weed_7 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1e4785208444f064f9bbd5dd11864b86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1e4785208444f064f9bbd5dd11864b86, type: 3}
       propertyPath: m_RootOrder
@@ -282,6 +307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ivy_1_3 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -358,6 +387,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_Name
       value: Ivy_1_3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_RootOrder
@@ -436,6 +469,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ivy_1_3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -512,6 +549,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_Name
       value: Ivy_1_3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_RootOrder
@@ -590,6 +631,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ivy_1_3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -666,6 +711,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_Name
       value: Ivy_1_3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 865597fca4b853f44b7b0fc39c1a72b3, type: 3}
       propertyPath: m_RootOrder
@@ -744,6 +793,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ivy_1 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 70ac0eee4c324f04289684a142c145a7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 70ac0eee4c324f04289684a142c145a7, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -820,6 +873,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 12c3ad7289593444c98a2c1f1790213a, type: 3}
       propertyPath: m_Name
       value: 5_Weed 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 12c3ad7289593444c98a2c1f1790213a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 12c3ad7289593444c98a2c1f1790213a, type: 3}
       propertyPath: m_RootOrder
@@ -909,6 +966,18 @@ PrefabInstance:
     - target: {fileID: 100644, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
       propertyPath: m_Name
       value: Tree_3_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100644, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 100648, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 100650, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400644, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
       propertyPath: m_RootOrder
@@ -1002,6 +1071,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ivy_1 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 70ac0eee4c324f04289684a142c145a7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 70ac0eee4c324f04289684a142c145a7, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1078,6 +1151,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 70ac0eee4c324f04289684a142c145a7, type: 3}
       propertyPath: m_Name
       value: Ivy_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 70ac0eee4c324f04289684a142c145a7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 70ac0eee4c324f04289684a142c145a7, type: 3}
       propertyPath: m_RootOrder
