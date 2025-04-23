@@ -3619,6 +3619,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744128067146882810, guid: 622a75510901949499a254a45e4be991,
         type: 3}
+      propertyPath: frontMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744128067146882810, guid: 622a75510901949499a254a45e4be991,
+        type: 3}
       propertyPath: verticalMovement
       value: 0
       objectReference: {fileID: 0}

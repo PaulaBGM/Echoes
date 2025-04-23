@@ -14,6 +14,7 @@ public class TargetController : MonoBehaviour
     private Vector3 startPosition;
 
     [SerializeField] private bool verticalMovement = false;
+    [SerializeField] private bool frontMovement = false;
 
     private void Awake()
     {
@@ -43,16 +44,20 @@ public class TargetController : MonoBehaviour
 
     private void Move()
     {
-        if (!verticalMovement)
+        float move = Mathf.PingPong(Time.time * moveSpeed, moveDistance);
+
+        if (!verticalMovement && !frontMovement)
         {
             // Movimiento de ida y vuelta horizontal (X)
-            float x = Mathf.PingPong(Time.time * moveSpeed, moveDistance);
-            transform.position = startPosition + new Vector3(x, 0, 0);
+            transform.position = startPosition + new Vector3(move, 0, 0);
         }
-        else
+        else if(frontMovement)
         {
-            float y = Mathf.PingPong(Time.time * moveSpeed, moveDistance);
-            transform.position = startPosition + new Vector3(0, y, 0);
+            transform.position = startPosition + new Vector3(0, 0, move);
+        }
+        else if (verticalMovement)
+        {
+            transform.position = startPosition + new Vector3(0, move, 0);
         }
     }
 }
