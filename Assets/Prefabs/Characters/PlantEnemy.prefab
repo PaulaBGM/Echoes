@@ -136,6 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7252020979399591840}
+  - component: {fileID: 8323398777323454656}
   m_Layer: 0
   m_Name: PlantEnemy
   m_TagString: Untagged
@@ -160,6 +161,20 @@ Transform:
   - {fileID: 6218941563552952929}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8323398777323454656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9085713263992847641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0c3aec901031c41be93e9ab29303eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 6bbf8abddf4e6d44989a893ad3d960c2, type: 3}
+  image: {fileID: 0}
 --- !u!1001 &1077484493735494033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,17 +185,17 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7435096357906394831, guid: 73c27cb584c1d5c4aa1ae56e06f8ba05,
         type: 3}
-      propertyPath: wayPoints.Array.data[0]
+      propertyPath: 'wayPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 6148649712339577831}
     - target: {fileID: 7435096357906394831, guid: 73c27cb584c1d5c4aa1ae56e06f8ba05,
         type: 3}
-      propertyPath: wayPoints.Array.data[1]
+      propertyPath: 'wayPoints.Array.data[1]'
       value: 
       objectReference: {fileID: 7985630222665152398}
     - target: {fileID: 7435096357906394831, guid: 73c27cb584c1d5c4aa1ae56e06f8ba05,
         type: 3}
-      propertyPath: wayPoints.Array.data[2]
+      propertyPath: 'wayPoints.Array.data[2]'
       value: 
       objectReference: {fileID: 595346778227811900}
     - target: {fileID: 8298650871840624702, guid: 73c27cb584c1d5c4aa1ae56e06f8ba05,
