@@ -8,6 +8,8 @@ public class GetWeapon : MonoBehaviour
     private WeaponController weaponController; // Para manejar las armas recogidas
     private Weapon nearbyWeapon; // Para detectar armas en el suelo
 
+    [SerializeField] private UIController uiController;
+
     [SerializeField] private float waitForAnim = 0.4f;
     [SerializeField] private GameObject[] weaponObjects;
     [SerializeField] private GameObject backWeaponObject;
@@ -51,23 +53,36 @@ public class GetWeapon : MonoBehaviour
 
     private void Update()
     {
+        CollectWeapon();
+
+        ChangeWeaponInput();
+    }
+
+    private void CollectWeapon()
+    {
         // Recoger arma si estamos cerca y presionamos F
-        if (isNearWeapon && Input.GetKeyDown(KeyCode.F))
+        if (isNearWeapon && Input.GetKeyDown(KeyCode.F) && nearbyWeapon != null)
         {
-            if (nearbyWeapon != null)
+            WeaponType weaponType = nearbyWeapon.weaponType;
+
+            if (!collectedWeapons.Contains(weaponType))
             {
-                WeaponType weaponType = nearbyWeapon.weaponType;
-                if (!collectedWeapons.Contains(weaponType))
-                {
-                    collectedWeapons.Add(weaponType);
-                }
-
-                playerBehavior.Animator.SetBool("pickUp", true);
-                ActivateWeapon(weaponType);
-                Destroy(nearbyWeapon.gameObject); // Eliminar el arma del suelo
+                collectedWeapons.Add(weaponType);
             }
-        }
 
+            playerBehavior.Animator.SetBool("pickUp", true);
+            ActivateWeapon(weaponType);
+
+            GameObject weaponObj = nearbyWeapon.gameObject;
+            nearbyWeapon = null;
+            isNearWeapon = false;
+
+            Destroy(weaponObj); // Destruye después de limpiar la referencia
+        }
+    }
+
+    private void ChangeWeaponInput()
+    {
         if (collectedWeapons.Count > 1 && !isSwitchingWeapon)
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -121,6 +136,8 @@ public class GetWeapon : MonoBehaviour
                 weaponController.SetWeaponType(type);
             }
         }
+
+        UpdateUI();
     }
 
     private IEnumerator SwitchWeaponCoroutine(int direction)
@@ -138,6 +155,11 @@ public class GetWeapon : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         playerBehavior.Animator.SetBool("switchWeapon", false);
         isSwitchingWeapon = false;
+    }
+
+    private void UpdateUI()
+    {
+        uiController.UpdateWeaponUI(currentWeaponType, hasPistol, hasLargeWeapon);
     }
 
     private void OnTriggerEnter(Collider other)
