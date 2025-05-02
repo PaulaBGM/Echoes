@@ -49,7 +49,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.043366663
+  - screenRelativeHeight: 0.052433
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 3133787656164186674}
@@ -166,15 +166,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300648, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b4c9a1a7de8e0aa47ae64e2757a05636, type: 2}
     - target: {fileID: 2300648, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
-      propertyPath: m_Materials.Array.data[1]
+      propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 7c0d67e757af20347a64f850a8e448f3, type: 2}
     - target: {fileID: 2300650, guid: ce6ea6bb4547787499e92bd80d28d62e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 56e4ec1cb28685e4fbfec226ee8ab6fe, type: 2}
     m_RemovedComponents:

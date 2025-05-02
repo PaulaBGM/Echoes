@@ -23,7 +23,6 @@ public class AIFollowingPath : AIBase
         anim.SetFloat("zSpeed", agent.speed);
         if (agent.remainingDistance < stopDistance && !agent.pathPending) 
         {
-            Debug.Log("Update Path");
             GoToNextPoint();
         }
     }
