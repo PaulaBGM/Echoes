@@ -16,6 +16,8 @@ public class PlayerBehavior : BaseHealth, ITargeteable
     public delegate void OnGameOverHandler();
     public static event OnGameOverHandler OnGameOver;
 
+    public bool isInDialogue = false;
+
     protected override void Start()
     {
         base.Start();
@@ -25,9 +27,11 @@ public class PlayerBehavior : BaseHealth, ITargeteable
 
     private void Update()
     {
+        if (isInDialogue) return;
+
         //ShootAnimation();
 
-        if(getWeapon.hasPistol)
+        if (getWeapon.hasPistol)
         {
             playerMove.canLongIddle = false;
             animator.SetBool("hasPistol", getWeapon.hasPistol);

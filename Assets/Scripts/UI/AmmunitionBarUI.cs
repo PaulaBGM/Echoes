@@ -49,6 +49,6 @@ public class AmmunitionBarUI : MonoBehaviour
         float percentage = (float)ammunition.CurrentAmmunition / ammunition.MaxAmmunition * 100f;
 
         // Actualizar el texto con el porcentaje (redondeado a un número entero)
-        percentageText.text = Mathf.RoundToInt(percentage).ToString() + "%";
+        percentageText.text = Mathf.RoundToInt(percentage).ToString();
     }
 }

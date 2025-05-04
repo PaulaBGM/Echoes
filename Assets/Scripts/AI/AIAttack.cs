@@ -12,7 +12,7 @@ public class AIAttack : AIBase
     public bool isAttacking = false;
     private float timeNextAttack;
 
-    void Start()
+    protected override void Start()
     {
         base.Start();
         timeNextAttack = timeBetweenAttacks;

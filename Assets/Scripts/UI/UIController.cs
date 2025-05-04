@@ -6,6 +6,13 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject playerHUD;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject fullCirclePistol;
+    [SerializeField] private GameObject fullCircleRifle;
+    [SerializeField] private GameObject fullCirclePistolSelect; //Por si solo se recoge este arma
+    [SerializeField] private GameObject fullCircleRifleSelect; //Por si solo se recoge este arma
+    [SerializeField] private GameObject middleCircleRifle;
+    [SerializeField] private GameObject middleCirclePistol;
+
     [SerializeField] private string sceneName;
 
     private void OnEnable()
@@ -54,5 +61,46 @@ public class UIController : MonoBehaviour
     {
         // Implementa la lógica para cerrar el juego
         Application.Quit();
+    }
+
+    public void UpdateWeaponUI(WeaponType activeWeapon, bool hasPistol, bool hasRifle)
+    {
+        bool hasBothWeapons = hasPistol && hasRifle;
+
+        // Apaga todo al inicio
+        fullCirclePistol.SetActive(false);
+        fullCircleRifle.SetActive(false);
+        fullCirclePistolSelect.SetActive(false);
+        fullCircleRifleSelect.SetActive(false);
+        middleCirclePistol.SetActive(false);
+        middleCircleRifle.SetActive(false);
+
+        if (!hasBothWeapons)
+        {
+            // Solo una arma: mostrar UI simple
+            if (activeWeapon == WeaponType.Short)
+            {
+                fullCirclePistolSelect.SetActive(true);
+            }
+            else if (activeWeapon == WeaponType.Long)
+            {
+                fullCircleRifleSelect.SetActive(true);
+            }
+            return;
+        }
+
+        // Dos armas: mostrar UI completa
+        switch (activeWeapon)
+        {
+            case WeaponType.Short:
+                fullCircleRifle.SetActive(true);       // Rifle está guardado
+                middleCirclePistol.SetActive(true);    // Pistola está activa
+                break;
+
+            case WeaponType.Long:
+                fullCirclePistol.SetActive(true);      // Pistola está guardada
+                middleCircleRifle.SetActive(true);     // Rifle está activo
+                break;
+        }
     }
 }

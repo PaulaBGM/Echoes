@@ -49,11 +49,11 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.25
+  - screenRelativeHeight: 0.4072712
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8795544745682372962}
-  - screenRelativeHeight: 0.025776858
+  - screenRelativeHeight: 0.2103611
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8795544745682372988}
@@ -174,7 +174,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300238, guid: b9efe6ae8bd53134e8349c2f862d45aa, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7c0d67e757af20347a64f850a8e448f3, type: 2}
     - target: {fileID: 2300240, guid: b9efe6ae8bd53134e8349c2f862d45aa, type: 3}
@@ -182,7 +182,7 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2300240, guid: b9efe6ae8bd53134e8349c2f862d45aa, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7c0d67e757af20347a64f850a8e448f3, type: 2}
     - target: {fileID: 2300242, guid: b9efe6ae8bd53134e8349c2f862d45aa, type: 3}
@@ -190,7 +190,7 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2300242, guid: b9efe6ae8bd53134e8349c2f862d45aa, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 56e4ec1cb28685e4fbfec226ee8ab6fe, type: 2}
     - target: {fileID: 20500000, guid: b9efe6ae8bd53134e8349c2f862d45aa, type: 3}

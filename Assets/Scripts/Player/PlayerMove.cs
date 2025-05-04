@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float normalSpeed = 3f;
     [SerializeField] private float currentSpeed = 0f;
     [SerializeField] private float runSpeed = 5f;
+    [SerializeField] private float underWaterSpeed = 1.5f;
     [SerializeField] private float stickToGroundSpeed = -3f;
 
     [Header("Jump")]
@@ -65,6 +66,7 @@ public class PlayerMove : MonoBehaviour
     private float slidenTime = 0f;
     private float slideVelocityFactor = 1f;
     private bool sliding = false;
+    private bool isInWater = false;
 
     //Variables de números enteros
     private static readonly int Jump = Animator.StringToHash("jump");
@@ -138,9 +140,15 @@ public class PlayerMove : MonoBehaviour
 
     private void ApplyVelocity()
     {
-        Vector3 totalVelocity = (playerVelocity + slideVelocity) * slideVelocityFactor + Vector3.up * verticalVelocity; ;
-         
-        ch_Controller.Move(totalVelocity * Time.deltaTime); 
+        Vector3 horizontalVelocity = playerVelocity + slideVelocity;
+
+        if (!isInWater)
+        {
+            horizontalVelocity *= slideVelocityFactor;
+        }
+
+        Vector3 totalVelocity = horizontalVelocity + Vector3.up * verticalVelocity;
+        ch_Controller.Move(totalVelocity * Time.deltaTime);
     }
 
     private void HandleCrouch()
@@ -180,6 +188,10 @@ public class PlayerMove : MonoBehaviour
             currentSpeed = crouchSpeed; // Si está agachado, se usa la velocidad de agachado
             walking = false; // Si está agachado, no se está corriendo
         }
+        else if (isInWater)
+        {
+            currentSpeed = underWaterSpeed;
+        }
         else
         {
             // Si se pulsa Shift, asignamos la velocidad de correr
@@ -196,6 +208,15 @@ public class PlayerMove : MonoBehaviour
         // Calculamos la velocidad en función de los inputs
         Vector3 localPlayerVelocity = new Vector3(xInput * currentSpeed, 0, zInput * currentSpeed);
         playerVelocity = transform.TransformVector(localPlayerVelocity); // Convertimos la velocidad local a la global
+
+        if (isInWater && !playerBehavior.Animator.GetBool("inWater"))
+        {
+            playerBehavior.Animator.SetBool("inWater", true);
+        }
+        else if (!isInWater && playerBehavior.Animator.GetBool("inWater"))
+        {
+            playerBehavior.Animator.SetBool("inWater", false);
+        }
 
         // Llamamos a las animaciones pasándole la velocidad de movimiento en cada eje
         playerBehavior.Animator.SetFloat(ZSpeed, localPlayerVelocity.z);
@@ -342,6 +363,8 @@ public class PlayerMove : MonoBehaviour
 
     private void StartDash()
     {
+        if (isInWater) return; // No permite dash bajo el agua
+
         isDashing = true; // Activamos el estado de dash
         dashTime = 0; // Reiniciamos el temporizador del dash
 
@@ -356,5 +379,10 @@ public class PlayerMove : MonoBehaviour
         playerBehavior.Animator.SetFloat(ZSpeed, dashSpeed);
         ch_Controller.Move(dashDirection * dashSpeed * Time.deltaTime); // Movemos al jugador en la dirección del dash
         if (dashTime >= dashDuration) isDashing = false; // Terminamos el dash cuando se cumple el tiempo
+    }
+
+    public void SetUnderwaterSpeed(bool inWater)
+    {
+        isInWater = inWater;
     }
 }

@@ -189,7 +189,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -276,12 +276,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &2460730237362284970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +807,26 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: underWaterSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: slideSlowCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: slideSlowCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: slideSlowCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3416886754890440203, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: normalCamera
@@ -939,12 +959,12 @@ PrefabInstance:
       objectReference: {fileID: 610698738030782235}
     - target: {fileID: 6407936739826764484, guid: d031a506946b06d409f004193857ab86,
         type: 3}
-      propertyPath: weapon.Array.data[0]
+      propertyPath: 'weapon.Array.data[0]'
       value: 
       objectReference: {fileID: 4312896164775541686}
     - target: {fileID: 6407936739826764484, guid: d031a506946b06d409f004193857ab86,
         type: 3}
-      propertyPath: weapon.Array.data[1]
+      propertyPath: 'weapon.Array.data[1]'
       value: 
       objectReference: {fileID: 4993279100909110237}
     - target: {fileID: 6407936739826764484, guid: d031a506946b06d409f004193857ab86,
@@ -954,17 +974,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6407936739826764484, guid: d031a506946b06d409f004193857ab86,
         type: 3}
-      propertyPath: weaponObjects.Array.data[0]
+      propertyPath: 'weaponObjects.Array.data[0]'
       value: 
       objectReference: {fileID: 4993279100909110237}
     - target: {fileID: 6407936739826764484, guid: d031a506946b06d409f004193857ab86,
         type: 3}
-      propertyPath: weaponObjects.Array.data[1]
+      propertyPath: 'weaponObjects.Array.data[1]'
       value: 
       objectReference: {fileID: 4312896164775541686}
     - target: {fileID: 6407936739826764484, guid: d031a506946b06d409f004193857ab86,
         type: 3}
-      propertyPath: weaponObjects.Array.data[2]
+      propertyPath: 'weaponObjects.Array.data[2]'
       value: 
       objectReference: {fileID: 610698738030782235}
     - target: {fileID: 6822043666298315776, guid: d031a506946b06d409f004193857ab86,
