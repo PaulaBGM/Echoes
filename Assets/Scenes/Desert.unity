@@ -718,6 +718,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4185690237413673998, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1885520257}
     - target: {fileID: 6420374894136350855, guid: 658d848840fcd7d408f57559cfd431e5,
         type: 3}
       propertyPath: m_Name
@@ -1994,6 +1999,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1144240215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1885520257 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1228226379305848636, guid: c1c8d03bc683260409def09137ab8eec,
+    type: 3}
+  m_PrefabInstance: {fileID: 542753307}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1990627127
 PrefabInstance:
   m_ObjectHideFlags: 0
