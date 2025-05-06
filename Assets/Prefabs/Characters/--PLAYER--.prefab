@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 152652509317590858}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.22, y: 1.6700001, z: -3.9}
+  m_LocalPosition: {x: 0.22, y: 1.67, z: -3.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -173,7 +173,7 @@ Transform:
   m_GameObject: {fileID: 1157711925227339960}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.22, y: 1.6700001, z: -3.9}
+  m_LocalPosition: {x: 0.22, y: 1.67, z: -3.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -819,13 +819,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
+      propertyPath: slideSlowCurve.m_Curve.Array.data[0].time
+      value: 0.0083351135
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
       propertyPath: slideSlowCurve.m_Curve.Array.data[1].time
+      value: 0.9916687
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: slideSlowCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: slideSlowCurve.m_Curve.Array.data[1].value
-      value: 1
+      value: 0.037750244
       objectReference: {fileID: 0}
     - target: {fileID: 3416886754890440203, guid: d031a506946b06d409f004193857ab86,
         type: 3}
