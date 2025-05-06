@@ -5,8 +5,8 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 3
-    smallestHole: 0.25
+    smallestOccluder: 10
+    smallestHole: 10
     backfaceThreshold: 100
   m_SceneGUID: 11c5d9906bd99af4e95a11015df5424b
   m_OcclusionCullingData: {fileID: 36300000, guid: b1680880c3e5c1b4389353a3e7542464,
@@ -2722,6 +2722,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7824752811718691117, guid: c446a3e1d5a1fc64b8375e60d587e7a0,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 605c68bed57dd5d45a1187eee7a2e950, type: 2}
     - target: {fileID: -7005126127977445882, guid: c446a3e1d5a1fc64b8375e60d587e7a0,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
