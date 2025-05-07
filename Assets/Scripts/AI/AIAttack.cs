@@ -18,11 +18,6 @@ public class AIAttack : AIBase
         timeNextAttack = timeBetweenAttacks;
     }
 
-    void Update()
-    {
-        
-    }
-
     public void AttackTimer(Transform target, Animator animator)
     {
         anim = animator;

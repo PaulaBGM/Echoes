@@ -797,15 +797,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6326876685021616136}
     m_Modifications:
+    - target: {fileID: 785763800738368741, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 785763800738368741, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2eaed119561ad6b4282fbdaddb73cc82, type: 2}
     - target: {fileID: 1217470313707842901, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1352453171546141768, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352453171546141768, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2eaed119561ad6b4282fbdaddb73cc82, type: 2}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: jumpForce
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: slideSlope
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
@@ -820,22 +845,22 @@ PrefabInstance:
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: slideSlowCurve.m_Curve.Array.data[0].time
-      value: 0.0083351135
+      value: -0.025527954
       objectReference: {fileID: 0}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: slideSlowCurve.m_Curve.Array.data[1].time
-      value: 0.9916687
+      value: 1.0127716
       objectReference: {fileID: 0}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: slideSlowCurve.m_Curve.Array.data[0].value
-      value: 1
+      value: 0.99349976
       objectReference: {fileID: 0}
     - target: {fileID: 1648265977509871230, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: slideSlowCurve.m_Curve.Array.data[1].value
-      value: 0.037750244
+      value: -0.0043258667
       objectReference: {fileID: 0}
     - target: {fileID: 3416886754890440203, guid: d031a506946b06d409f004193857ab86,
         type: 3}
@@ -957,6 +982,11 @@ PrefabInstance:
       propertyPath: pistolCamera
       value: 
       objectReference: {fileID: 277311949493452590}
+    - target: {fileID: 6095561253607211723, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: rifleParticles
+      value: 
+      objectReference: {fileID: 100006, guid: 7e9c50938e32351438a7df9ccad2f2a5, type: 3}
     - target: {fileID: 6407936739826764484, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: waitForAnim
@@ -1017,6 +1047,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7990281939894832938, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 688786e2e3bac0d48aacc3f804da0a4b, type: 2}
     - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: camFollowPistol
@@ -1176,9 +1211,10 @@ MonoBehaviour:
   aimState: {fileID: 3176073746653060377}
   bulletPrefab: {fileID: 2186950268952709522, guid: fca6996b55c6139458c502145a64fee6,
     type: 3}
+  rifleParticles: {fileID: 100006, guid: 7e9c50938e32351438a7df9ccad2f2a5, type: 3}
   shootSpawn: {fileID: 5985110621780711499}
-  baseFireRate: 0.5
-  pistolFireRateMultiplier: 2
+  rifleFireRate: 0.2
+  pistolFireRate: 0.5
   crosshairImage: {fileID: 0}
   normalCamera: {fileID: 152652509317590858}
   pistolCamera: {fileID: 277311949493452590}
@@ -1186,7 +1222,7 @@ MonoBehaviour:
   camFollowPos_Normal: {fileID: 1961441585154043563}
   isShooting: 0
   isAiming: 0
-  currentWeapon: 0
+  currentWeapon: 1
 --- !u!4 &5985110621780711499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 477804089445086915, guid: d031a506946b06d409f004193857ab86,

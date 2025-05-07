@@ -5,9 +5,10 @@ public class WeaponController : Weapon
 {
     [SerializeField] private AimStateManager aimState;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject rifleParticles;
     [SerializeField] private Transform shootSpawn;
-    [SerializeField] private float baseFireRate = 0.2f; // Tiempo base entre disparos
-    [SerializeField] private float pistolFireRateMultiplier = 2f; // La pistola tarda el doble
+    [SerializeField] private float rifleFireRate = 0.2f; // Tiempo base entre disparos
+    [SerializeField] private float pistolFireRate = 0.5f; // La pistola tarda el doble
     private float lastShootTime = 0f;
 
     [Header("Camera")]
@@ -19,8 +20,8 @@ public class WeaponController : Weapon
 
     public bool isShooting = false;
     public bool isAiming = false;
-    private Coroutine shootingCoroutine = null;
     private AmmunitionManager ammoManager;
+    private Coroutine shootingCoroutine;
 
     public WeaponType currentWeapon = WeaponType.Long; // Tipo de arma actual
 
@@ -38,21 +39,32 @@ public class WeaponController : Weapon
 
     void HandleShooting()
     {
-        float actualFireRate = baseFireRate * (currentWeapon == WeaponType.Short ? pistolFireRateMultiplier : 1f);
-
-        if (Input.GetMouseButton(0)) // Si el botón del ratón está presionado
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Time.time - lastShootTime >= actualFireRate) // Solo disparar si ha pasado el tiempo suficiente
+            if (shootingCoroutine == null)
+                shootingCoroutine = StartCoroutine(AutoFireCoroutine());
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (shootingCoroutine != null)
             {
-                TryShoot();
+                StopCoroutine(shootingCoroutine);
+                shootingCoroutine = null;
             }
         }
-        else if (Input.GetMouseButtonDown(0)) // Si se hace clic una vez más
+    }
+
+    IEnumerator AutoFireCoroutine()
+    {
+        while (true)
         {
-            if (Time.time - lastShootTime >= actualFireRate) // Solo disparar si ha pasado el tiempo suficiente
-            {
-                TryShoot();
-            }
+            TryShoot();
+
+            float fireRate = currentWeapon == WeaponType.Short
+                ? pistolFireRate
+                : rifleFireRate;
+
+            yield return new WaitForSeconds(fireRate);
         }
     }
 
@@ -118,6 +130,8 @@ public class WeaponController : Weapon
     void InstantiateBullet()
     {
         Instantiate(bulletPrefab, shootSpawn.position, shootSpawn.rotation);
+        GameObject particles = Instantiate(rifleParticles, shootSpawn.position, shootSpawn.rotation);
+        Destroy(particles, 0.5f); // Ajusta el tiempo al que dure tu efecto
     }
 
     public void SetWeaponType(WeaponType weapon)

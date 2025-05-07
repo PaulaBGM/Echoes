@@ -269,56 +269,91 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateSlideVelocity()
     {
-        Vector3 maxSlideVelocity = Vector3.zero;
-
         RaycastHit hitInfo;
 
-        if (ch_Controller.isGrounded && Physics.Raycast(transform.position, Vector3.down, out hitInfo, ch_Controller.height))
-        {
-            float angle = Vector3.Angle(hitInfo.normal, Vector3.up); //Ángulo entre la normal del HitInfo y el Vector.up.
+        // Origen del raycast levemente elevado para evitar colisión dentro del suelo
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
 
+        // Raycast hacia abajo para detectar el suelo bajo el personaje
+        bool hit = Physics.Raycast(rayOrigin, Vector3.down, out hitInfo, ch_Controller.height / 2 + 0.5f);
+
+        if (ch_Controller.isGrounded && hit)
+        {
+            // Calcula el ángulo entre la normal del suelo y el vector hacia arriba
+            float angle = Vector3.Angle(hitInfo.normal, Vector3.up);
+
+            // Si el ángulo es mayor que el umbral definido como pendiente resbaladiza
             if (angle > slideSlope)
             {
-                sliding = true;
+                // Si no estaba deslizando, reseteamos parámetros
+                if (!sliding)
+                {
+                    sliding = true;
+                    slidenTime = 0f;
+                    slideVelocity = Vector3.zero;
+                }
 
-                Vector3 slideDirection = Vector3.ProjectOnPlane(Vector3.down, hitInfo.normal).normalized; //Dirección del slide proyectado en un plano.
+                // Calculamos la dirección de deslizamiento sobre la pendiente
+                Vector3 slideDir = Vector3.ProjectOnPlane(Vector3.down, hitInfo.normal).normalized;
 
-                //REVISAR YA QUE NO SE CAE POR LA PENDIENTE
-                maxSlideVelocity = slideDirection * slideSpeed;
+                // Velocidad objetivo del deslizamiento
+                Vector3 targetSlide = slideDir * slideSpeed;
 
-                Debug.DrawRay(hitInfo.point, hitInfo.normal, Color.red, 3);
-                Debug.DrawRay(hitInfo.point, slideDirection, Color.blue, 3);
+                // Limita la velocidad máxima de deslizamiento
+                targetSlide = Vector3.ClampMagnitude(targetSlide, maxSlideVelocity);
+
+                // Si recién empezó el deslizamiento, asigna directamente la velocidad
+                if (slidenTime < 0.1f)
+                {
+                    slideVelocity = targetSlide;
+                }
+                else
+                {
+                    // Suaviza la transición hacia la velocidad objetivo
+                    slideVelocity = Vector3.Lerp(slideVelocity, targetSlide, Time.deltaTime * 5f);
+                }
             }
             else
             {
-                sliding = false;
-                slidenTime = 0;
+                // Si ya no hay pendiente pronunciada pero antes había deslizamiento
+                if (sliding)
+                {
+                    // Suaviza la detención del deslizamiento
+                    slideVelocity = Vector3.Lerp(slideVelocity, Vector3.zero, Time.deltaTime * 10f);
+
+                    // Si la velocidad es muy baja, detiene el deslizamiento
+                    if (slideVelocity.magnitude < 0.1f)
+                    {
+                        sliding = false;
+                        slidenTime = 0f;
+                        slideVelocity = Vector3.zero;
+                    }
+                }
             }
         }
+        else
+        {
+            // No hay suelo o no está en el suelo (en el aire)
+            sliding = false;
+            slidenTime = 0f;
+            slideVelocity = Vector3.zero;
+        }
 
+        // Si está deslizando, actualiza el factor de desaceleración según la curva
         if (sliding)
         {
             slidenTime += Time.deltaTime;
+
+            float t = Mathf.Clamp01(slidenTime / slideDownTime);
+
+            // Aplica curva con un mínimo inicial para evitar frenado
+            slideVelocityFactor = Mathf.Max(0.4f, slideSlowCurve.Evaluate(t));
         }
-
-        /// <summary>
-        /// Calcula la velocidad del deslizamiento dependiendo de si el personaje está deslizándose o no.
-        /// (?) Si está deslizándose, interpolar la velocidad hacia la velocidad máxima con un factor de suavizado.
-        /// (:) Si no está deslizándose, reducir gradualmente la velocidad hasta detenerse (Vector3.zero).
-        /// </summary>
-
-        slideVelocity = sliding
-            ? Vector3.Lerp(slideVelocity, maxSlideVelocity, Time.deltaTime * 3)
-            : Vector3.Lerp(slideVelocity, Vector3.zero, Time.deltaTime * 5);
-
-        /// <summary>
-        /// Ralentizar el movimiento tras alcanzar la velocidad máxima.
-        /// (?) Si está deslizándose, usar una curva de desaceleración para ajustar la velocidad en función del tiempo de deslizamiento.
-        /// (:) Si no está deslizándose, suavizar el factor de velocidad de vuelta a 1 con interpolación lineal.
-        /// </summary>
-        slideVelocityFactor = sliding
-            ? slideSlowCurve.Evaluate(Mathf.Clamp01(slidenTime / slideDownTime))
-            : Mathf.Lerp(slideVelocityFactor, 1, 10 * Time.deltaTime);
+        else
+        {
+            // Si no está deslizando, suavemente vuelve el factor a 1
+            slideVelocityFactor = Mathf.Lerp(slideVelocityFactor, 1f, Time.deltaTime * 10f);
+        }
     }
 
     private void StartCrouch()

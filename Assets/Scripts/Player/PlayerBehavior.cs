@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerBehavior : BaseHealth, ITargeteable
@@ -17,6 +18,8 @@ public class PlayerBehavior : BaseHealth, ITargeteable
     public static event OnGameOverHandler OnGameOver;
 
     public bool isInDialogue = false;
+
+    public static event Action OnPlayerDied;  // <--- NUEVO
 
     protected override void Start()
     {
@@ -62,10 +65,13 @@ public class PlayerBehavior : BaseHealth, ITargeteable
 
     protected override void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         Debug.Log("MUERTA");
         animator.SetBool("isDeath", true);
 
-        // Dispara el evento de "Game Over" para que la UI lo gestione
         OnGameOver?.Invoke();
+        OnPlayerDied?.Invoke(); // <--- Notifica a todos
     }
 }

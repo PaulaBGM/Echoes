@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class AimStateManager : MonoBehaviour
 {
+    private PlayerBehavior playerBehavior;
     public AxisState xAxis, yAxis;
     public Transform camFollowPos;
 
@@ -17,6 +18,8 @@ public class AimStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerBehavior = GetComponent<PlayerBehavior>();
+
         currentXRotation = transform.eulerAngles.y;
         currentYRotation = camFollowPos.localEulerAngles.x;
     }
@@ -24,24 +27,31 @@ public class AimStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerBehavior.IsDead) return;
+
         xAxis.Update(Time.deltaTime);
         yAxis.Update(Time.deltaTime);
     }
 
     private void LateUpdate()
     {
+        if (playerBehavior.IsDead) return;
+
         SmoothRotate(camFollowPos, xAxis, yAxis);
     }
+
     public void ShootCamera() 
     {
         yAxis.m_MinValue = -11f;
         yAxis.m_MaxValue = 3f;
     }
+
     public void NormalCamera()
     {
         yAxis.m_MinValue = -15f;
         yAxis.m_MaxValue = 15f;
     }
+
     private void SmoothRotate(Transform location, AxisState x, AxisState y)
     {
         // Obtener los valores interpolados suavemente
@@ -58,5 +68,4 @@ public class AimStateManager : MonoBehaviour
         currentXRotation = targetXRotation;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentXRotation, transform.eulerAngles.z);
     }
-
 }

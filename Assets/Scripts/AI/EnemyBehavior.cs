@@ -35,6 +35,17 @@ public class EnemyBehavior : BaseHealth
     private AIAttack enemyAttack;
     private bool killPlayer;
 
+    private void OnEnable()
+    {
+        PlayerBehavior.OnPlayerDied += OnPlayerKilled;
+    }
+
+    private void OnDisable()
+    {
+        PlayerBehavior.OnPlayerDied -= OnPlayerKilled;
+    }
+
+
     protected override void Start()
     {
         base.Start();
@@ -105,6 +116,7 @@ public class EnemyBehavior : BaseHealth
     private void UpdateFollowingPath()
     {
         if (!enemyVision.CheckVisionToPlayer()) return;
+
         if (enemyVision.CheckAttackDistance(attackDistance))
         {
             ChangeState(EnemyState.Attack);
@@ -122,6 +134,7 @@ public class EnemyBehavior : BaseHealth
     {
         agent.speed = runSpeed;
         animator.SetFloat("zSpeed", agent.speed);
+
         if (!enemyVision.CheckVisionToPlayer())
         {
             ChangeState(EnemyState.Wandering);
@@ -179,15 +192,18 @@ public class EnemyBehavior : BaseHealth
         Destroy(this.gameObject);
     }
 
+    private void OnPlayerKilled()
+    {
+        if (killPlayer) return;
+
+        agent.isStopped = true;
+        animator.SetTrigger("KillPlayer"); // Solo se activa una vez
+        killPlayer = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<ITargeteable>() == null) return;
         target = other.transform;
-
-        if(other.GetComponent<PlayerBehavior>().IsDead)
-        {
-            killPlayer = true;
-            animator.SetBool("KillPlayer", true);
-        }
     }
 }

@@ -12,7 +12,6 @@ public class AIBase : MonoBehaviour
     [SerializeField] protected float stopDistance = 0.1f;
     protected Animator anim;
     
-  
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();

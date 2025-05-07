@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8316228671806141014}
   - component: {fileID: 5412145900773213392}
   - component: {fileID: 1457726051866692073}
+  - component: {fileID: 3198421129973846944}
   m_Layer: 0
   m_Name: FlowersP_2
   m_TagString: Untagged
@@ -86,3 +87,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3136088002672710365}
   m_Mesh: {fileID: 4300002, guid: af7d22f99d479404299d68c19e7f6c31, type: 3}
+--- !u!205 &3198421129973846944
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136088002672710365}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.0027324855, y: 0.3486718, z: 0.017181188}
+  m_Size: 0.73621434
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5412145900773213392}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5412145900773213392}
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5412145900773213392}
+  m_Enabled: 1
