@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8815112628084247972}
   - component: {fileID: 7984322941908800541}
   - component: {fileID: 7127875376754955703}
+  - component: {fileID: 4298334475550046241}
   m_Layer: 0
   m_Name: SM_MZRa_Banana_B092
   m_TagString: Untagged
@@ -87,3 +88,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &4298334475550046241
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855189083760195466}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.12
+  m_Height: 1.22
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.59, z: 0}

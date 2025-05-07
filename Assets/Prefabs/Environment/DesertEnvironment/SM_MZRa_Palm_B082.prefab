@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 59194124721785924}
   - component: {fileID: 4358736414396264646}
   - component: {fileID: 8287511652970308344}
+  - component: {fileID: 2702315647828179565}
   m_Layer: 0
   m_Name: SM_MZRa_Palm_B082
   m_TagString: Untagged
@@ -87,3 +88,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &2702315647828179565
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992288416328740371}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 3.87
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.28, z: 0}

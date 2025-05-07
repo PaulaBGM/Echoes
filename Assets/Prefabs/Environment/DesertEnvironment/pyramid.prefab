@@ -71,5 +71,73 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1bc97db716ff6134bb3bd2ef22aec261,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1935501306311702742}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1bc97db716ff6134bb3bd2ef22aec261,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6184337073655385938}
   m_SourcePrefab: {fileID: 100100000, guid: 1bc97db716ff6134bb3bd2ef22aec261, type: 3}
+--- !u!1 &2964048446897872519 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1bc97db716ff6134bb3bd2ef22aec261,
+    type: 3}
+  m_PrefabInstance: {fileID: 2730029691739595734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!205 &1935501306311702742
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964048446897872519}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: -0.66189384, z: 5.9800034}
+  m_Size: 29.06485
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3612614964693106514}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3612614964693106514}
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3612614964693106514}
+  m_Enabled: 1
+--- !u!65 &6184337073655385938
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964048446897872519}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 27.74105, y: 28.535843, z: 10.16309}
+  m_Center: {x: 0, y: -0.39739704, z: 5.0415435}
+--- !u!23 &3612614964693106514 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1bc97db716ff6134bb3bd2ef22aec261,
+    type: 3}
+  m_PrefabInstance: {fileID: 2730029691739595734}
+  m_PrefabAsset: {fileID: 0}
