@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4358736414396264646}
   - component: {fileID: 8287511652970308344}
   - component: {fileID: 2702315647828179565}
+  - component: {fileID: 1477438338166280194}
   m_Layer: 0
   m_Name: SM_MZRa_Palm_B082
   m_TagString: Untagged
@@ -111,3 +112,26 @@ CapsuleCollider:
   m_Height: 3.87
   m_Direction: 1
   m_Center: {x: 0, y: 1.28, z: 0}
+--- !u!205 &1477438338166280194
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992288416328740371}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.25193095, y: 3.3405266, z: -0.0972178}
+  m_Size: 6.681053
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8287511652970308344}
+  - screenRelativeHeight: 0.036108077
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8287511652970308344}
+  m_Enabled: 1
