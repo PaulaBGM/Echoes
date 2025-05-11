@@ -125,6 +125,7 @@ Material:
     - Vector1_7ECA40: 0.591
     - Vector1_8FC408F2: 5
     - Vector1_92EFBA: 0.51
+    - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
@@ -196,8 +197,8 @@ Material:
     - _uv2: 5
     - _uv3: 5
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.7169812, g: 0.7000712, b: 0.7000712, a: 1}
+    - _Color: {r: 0.7169812, g: 0.7000712, b: 0.7000712, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

@@ -395,9 +395,9 @@ Material:
     - _windSpeed: 1.66
     - _windStrengh: 0.29
     m_Colors:
-    - _BaseColor: {r: 0.9433962, g: 0.5555649, b: 0.24474904, a: 1}
+    - _BaseColor: {r: 0.6226415, g: 0.36988646, b: 0.16153437, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.9433962, g: 0.5555649, b: 0.24474901, a: 1}
+    - _Color: {r: 0.62264144, g: 0.36988643, b: 0.16153434, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
