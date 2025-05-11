@@ -23,7 +23,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: AvaHairRed_Mat
-    second: {fileID: 2100000, guid: 688786e2e3bac0d48aacc3f804da0a4b, type: 2}
+    second: {fileID: 2100000, guid: aac10e80c117a654290362c61b14f52a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7984322941908800541}
   - component: {fileID: 7127875376754955703}
   - component: {fileID: 4298334475550046241}
+  - component: {fileID: 1998766417742885001}
   m_Layer: 0
   m_Name: SM_MZRa_Banana_B092
   m_TagString: Untagged
@@ -111,3 +112,26 @@ CapsuleCollider:
   m_Height: 1.22
   m_Direction: 1
   m_Center: {x: 0, y: 0.59, z: 0}
+--- !u!205 &1998766417742885001
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855189083760195466}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.1767981, y: 1.3868583, z: -0.043629766}
+  m_Size: 2.891434
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7127875376754955703}
+  - screenRelativeHeight: 0.07450819
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7127875376754955703}
+  m_Enabled: 1

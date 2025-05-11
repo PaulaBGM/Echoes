@@ -279,18 +279,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee58c2c2ccfb0bf4e9ef42f597b50498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
   aimState: {fileID: 8772251287208162193}
   bulletPrefab: {fileID: 2186950268952709522, guid: fca6996b55c6139458c502145a64fee6,
     type: 3}
+  rifleParticles: {fileID: 0}
   shootSpawn: {fileID: 5042876753389285065}
-  fireRate: 0.1
+  rifleFireRate: 0.2
+  pistolFireRate: 0.5
   crosshairImage: {fileID: 0}
   normalCamera: {fileID: 0}
   pistolCamera: {fileID: 0}
   camFollowPos_Pistol: {fileID: 6822043666298315776}
   camFollowPos_Normal: {fileID: 5662874750213111843}
   isShooting: 0
-  currentShootMode: 0
+  isAiming: 0
+  currentWeapon: 0
 --- !u!1001 &4841319231465522783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -359,6 +363,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3300290974145808757, guid: 10b51542fdcf9e045b4b169b777a6adb,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aac10e80c117a654290362c61b14f52a, type: 2}
     - target: {fileID: 5866666021909216657, guid: 10b51542fdcf9e045b4b169b777a6adb,
         type: 3}
       propertyPath: m_Controller
@@ -428,7 +437,6 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -454,6 +462,7 @@ MonoBehaviour:
   normalSpeed: 3
   currentSpeed: 0
   runSpeed: 5
+  underWaterSpeed: 1.5
   stickToGroundSpeed: -3
   jumpForce: 7
   groundLayer:
@@ -462,6 +471,16 @@ MonoBehaviour:
   endJumpAnimTime: 0.3
   timeBetweenJump: 0.3
   initialJumpAnimTime: 0.3
+  slideSlowCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  slideSlope: 4
+  slideSpeed: 3
+  maxSlideVelocity: 6
+  slideDownTime: 3
   crouchSpeed: 1
   standHeight: 1.8
   crouchHeight: 0.6
@@ -473,6 +492,9 @@ MonoBehaviour:
   dashDuration: 1
   dashSpeed: 7
   dashEndSpeed: 1
+  ceilingLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8772251287208162193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e11948cdcfeeb469b0b8c474635e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiController: {fileID: 0}
   waitForAnim: 0.4
   weaponObjects: []
   backWeaponObject: {fileID: 0}
@@ -556,7 +579,10 @@ MonoBehaviour:
   damageCooldown: 0
   longWeaponController: {fileID: 0}
   shortWeaponController: {fileID: 0}
+  delayOpenGameOver: 0
+  gameOverMenu: {fileID: 0}
   chestBone: {fileID: 0}
+  isInDialogue: 0
 --- !u!4 &6528670224226384279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 10b51542fdcf9e045b4b169b777a6adb,

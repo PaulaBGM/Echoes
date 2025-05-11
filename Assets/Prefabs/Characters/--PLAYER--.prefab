@@ -1061,7 +1061,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 688786e2e3bac0d48aacc3f804da0a4b, type: 2}
+      objectReference: {fileID: 2100000, guid: aac10e80c117a654290362c61b14f52a, type: 2}
     - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: camFollowPistol
