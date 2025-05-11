@@ -74,6 +74,8 @@ public class PlayerMove : MonoBehaviour
     private static readonly int XSpeed = Animator.StringToHash("xSpeed");
     private static readonly int Crouched = Animator.StringToHash("crouched");
 
+    [SerializeField] private LayerMask ceilingLayer; // Crea un LayerMask en el inspector solo para techo/obstáculos
+
     private void Start()
     {
         ch_Controller = GetComponent<CharacterController>();
@@ -82,6 +84,8 @@ public class PlayerMove : MonoBehaviour
 
     private  void Update()
     {
+        Debug.Log("CROUCH:" + isCrouched);
+
         if (playerBehavior.IsDead) return;
 
         if (isDashing)
@@ -153,15 +157,16 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleCrouch()
     {
-        // Si se mantiene presionada la tecla LeftControl, se agacha
-        if (Input.GetKey(KeyCode.LeftControl) && !isCrouched)
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            StartCrouch();
-        }
-        // Levantarse si se suelta la tecla
-        else if (Input.GetKeyUp(KeyCode.LeftControl) && isCrouched)
-        {
-            tryingToStand = true;
+            if (!isCrouched && !tryingToStand)
+            {
+                StartCrouch();
+            }
+            else if (isCrouched && !tryingToStand)
+            {
+                tryingToStand = true;
+            }
         }
     }
 
@@ -377,8 +382,11 @@ public class PlayerMove : MonoBehaviour
     private bool CanStandUp()
     {
         RaycastHit hitInfo;
+        float checkDistance = standHeight - crouchHeight; // altura adicional necesaria
 
-        return !Physics.SphereCast(transform.position + ch_Controller.center, ch_Controller.radius, Vector3.up, out hitInfo, 2f);
+        Vector3 start = transform.position + Vector3.up * crouchHeight;
+        // Solo colisiona con objetos en "ceilingLayer", no con armas ni el propio jugador
+        return !Physics.SphereCast(start, ch_Controller.radius, Vector3.up, out hitInfo, checkDistance, ceilingLayer); ;
     }
 
     private void StandUp()
@@ -387,7 +395,6 @@ public class PlayerMove : MonoBehaviour
         ch_Controller.center = new Vector3(0, standCenter, 0);
         playerBehavior.Animator.SetInteger(Crouched, 2);
         isCrouched = false;
-        StartCoroutine(ResetCrouchState());
     }
 
     private IEnumerator ResetCrouchState()
