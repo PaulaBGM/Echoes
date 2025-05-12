@@ -1,71 +1,82 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using Unity.Cinemachine;
 
 public class AimStateManager : MonoBehaviour
 {
     private PlayerBehavior playerBehavior;
-    public AxisState xAxis, yAxis;
+    public string xAxisInput = "Mouse X";
+    public string yAxisInput = "Mouse Y";
     public Transform camFollowPos;
 
     [Header("Smooth Settings")]
-    [SerializeField] private float smoothSpeed = 10f; // Velocidad de suavizado
+    [SerializeField] private float smoothSpeed = 10f;
 
     private float currentXRotation;
     private float currentYRotation;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("Cameras")]
+    [SerializeField] private CinemachineCamera mainCamera;
+    [SerializeField] private CinemachineCamera droneCamera;
+    [SerializeField] private KeyCode switchCameraKey = KeyCode.E;
+
+    private bool isDroneCameraActive = false;
+
+    void Awake()
     {
         playerBehavior = GetComponent<PlayerBehavior>();
-
         currentXRotation = transform.eulerAngles.y;
         currentYRotation = camFollowPos.localEulerAngles.x;
+
+        mainCamera.Priority = 10;
+        droneCamera.Priority = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (playerBehavior.IsDead) return;
+        if (playerBehavior == null || playerBehavior.IsDead) return;
 
-        xAxis.Update(Time.deltaTime);
-        yAxis.Update(Time.deltaTime);
+        if (Input.GetKeyDown(switchCameraKey))
+        {
+            ToggleCamera();
+        }
     }
 
     private void LateUpdate()
     {
-        if (playerBehavior.IsDead) return;
-
-        SmoothRotate(camFollowPos, xAxis, yAxis);
+        if (playerBehavior == null || playerBehavior.IsDead) return;
+        SmoothRotate(camFollowPos);
     }
 
-    public void ShootCamera() 
+    public void ShootCamera()
     {
-        yAxis.m_MinValue = -11f;
-        yAxis.m_MaxValue = 3f;
+        currentYRotation = Mathf.Clamp(currentYRotation, -11f, 3f);
     }
 
     public void NormalCamera()
     {
-        yAxis.m_MinValue = -15f;
-        yAxis.m_MaxValue = 15f;
+        currentYRotation = Mathf.Clamp(currentYRotation, -15f, 15f);
     }
 
-    private void SmoothRotate(Transform location, AxisState x, AxisState y)
+    private void ToggleCamera()
     {
-        // Obtener los valores interpolados suavemente
-        float targetYRotation = Mathf.LerpAngle(currentYRotation, y.Value, Time.deltaTime * smoothSpeed);
-        float targetXRotation = Mathf.LerpAngle(currentXRotation, x.Value, Time.deltaTime * smoothSpeed);
+        isDroneCameraActive = !isDroneCameraActive;
+        mainCamera.Priority = isDroneCameraActive ? 0 : 10;
+        droneCamera.Priority = isDroneCameraActive ? 10 : 0;
+    }
 
-        // Clampear el valor interpolado para evitar sobrepasar los límites
-        targetYRotation = Mathf.Clamp(targetYRotation, yAxis.m_MinValue, yAxis.m_MaxValue);
+    private void SmoothRotate(Transform location)
+    {
+        float mouseX = Input.GetAxis(xAxisInput) * smoothSpeed * Time.deltaTime;
+        float mouseY = Input.GetAxis(yAxisInput) * smoothSpeed * Time.deltaTime;
 
-        // Aplicar la rotación suavizada
-        currentYRotation = targetYRotation;
-        location.localEulerAngles = new Vector3(currentYRotation, location.localEulerAngles.y, location.localEulerAngles.z);
+        currentXRotation += mouseX;
+        currentYRotation -= mouseY;
 
-        currentXRotation = targetXRotation;
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentXRotation, transform.eulerAngles.z);
+        currentYRotation = Mathf.Clamp(currentYRotation, -15f, 15f);
+
+        location.localRotation = Quaternion.Euler(currentYRotation, 0f, 0f);
+        transform.rotation = Quaternion.Euler(0f, currentXRotation, 0f);
     }
 }

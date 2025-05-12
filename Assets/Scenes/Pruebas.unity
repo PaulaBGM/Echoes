@@ -4641,6 +4641,16 @@ PrefabInstance:
       propertyPath: crosshairImage
       value: 
       objectReference: {fileID: 1327270651}
+    - target: {fileID: 152652509317590858, guid: c1c8d03bc683260409def09137ab8eec,
+        type: 3}
+      propertyPath: m_Name
+      value: VirtualCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 277311949493452590, guid: c1c8d03bc683260409def09137ab8eec,
+        type: 3}
+      propertyPath: m_Name
+      value: VirtualCamera_Pistol
+      objectReference: {fileID: 0}
     - target: {fileID: 955733630733182028, guid: c1c8d03bc683260409def09137ab8eec,
         type: 3}
       propertyPath: uiController
@@ -4711,7 +4721,11 @@ PrefabInstance:
       propertyPath: crosshairImage
       value: 
       objectReference: {fileID: 1327270651}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5490909308865941023, guid: c1c8d03bc683260409def09137ab8eec, type: 3}
+    - {fileID: 590620123472362936, guid: c1c8d03bc683260409def09137ab8eec, type: 3}
+    - {fileID: 3500277017063642410, guid: c1c8d03bc683260409def09137ab8eec, type: 3}
+    - {fileID: 8776267600422623637, guid: c1c8d03bc683260409def09137ab8eec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
