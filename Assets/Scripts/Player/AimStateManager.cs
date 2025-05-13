@@ -33,7 +33,7 @@ public class AimStateManager : MonoBehaviour
 
         mainCamera.Priority = 10;
         droneCamera.Priority = 0;
-        
+
         if (droneObject != null)
         {
             droneObject.SetActive(false);
@@ -84,7 +84,6 @@ public class AimStateManager : MonoBehaviour
             playerMove.enabled = !isDroneCameraActive;
         }
     }
-
 
 
     private void SmoothRotate(Transform location)

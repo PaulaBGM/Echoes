@@ -1107,6 +1107,11 @@ PrefabInstance:
       objectReference: {fileID: 3995843638368977893}
     - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
         type: 3}
+      propertyPath: smoothSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
       propertyPath: camFollowPistol
       value: 
       objectReference: {fileID: 4436880305127488748}
