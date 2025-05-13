@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2468403698328585800}
   serializedVersion: 2
   m_LocalRotation: {x: -0.16364259, y: 0.013902129, z: -0.0023060376, w: -0.9864191}
-  m_LocalPosition: {x: 0.08547355, y: 1.1310902, z: -2.8738174}
+  m_LocalPosition: {x: 0.11, y: 2.31, z: -3.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,7 +86,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 24.81
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
@@ -96,7 +96,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 43.95
+      value: -31.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_Name
-      value: 'low 2 '
+      value: robot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -181,4 +181,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  acceleration: 2
+  maxSpeed: 10
   rotationSpeed: 2
+  smoothRotationTime: 0.1
+  viewDistance: 15
+  viewAngle: 70
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 1

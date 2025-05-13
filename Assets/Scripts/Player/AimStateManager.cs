@@ -21,6 +21,8 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] private CinemachineCamera droneCamera;
     [SerializeField] private KeyCode switchCameraKey = KeyCode.E;
 
+    [Header("Drone Settings")]
+    [SerializeField] private GameObject droneObject;
     private bool isDroneCameraActive = false;
 
     void Awake()
@@ -31,6 +33,11 @@ public class AimStateManager : MonoBehaviour
 
         mainCamera.Priority = 10;
         droneCamera.Priority = 0;
+        
+        if (droneObject != null)
+        {
+            droneObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -64,7 +71,21 @@ public class AimStateManager : MonoBehaviour
         isDroneCameraActive = !isDroneCameraActive;
         mainCamera.Priority = isDroneCameraActive ? 0 : 10;
         droneCamera.Priority = isDroneCameraActive ? 10 : 0;
+
+        if (droneObject != null)
+        {
+            droneObject.SetActive(isDroneCameraActive);
+        }
+
+        // Desactivar PlayerMove si la cámara principal no está activa
+        PlayerMove playerMove = GetComponent<PlayerMove>();
+        if (playerMove != null)
+        {
+            playerMove.enabled = !isDroneCameraActive;
+        }
     }
+
+
 
     private void SmoothRotate(Transform location)
     {
