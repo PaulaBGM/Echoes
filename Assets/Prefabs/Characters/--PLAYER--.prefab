@@ -1012,6 +1012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6095561253607211723, guid: d031a506946b06d409f004193857ab86,
         type: 3}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 100000, guid: 03a4a1935a9f4454c861dfa0aa6df562, type: 3}
+    - target: {fileID: 6095561253607211723, guid: d031a506946b06d409f004193857ab86,
+        type: 3}
       propertyPath: normalCamera
       value: 
       objectReference: {fileID: 152652509317590858}
@@ -1089,7 +1094,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: aac10e80c117a654290362c61b14f52a, type: 2}
+      objectReference: {fileID: 2100000, guid: 688786e2e3bac0d48aacc3f804da0a4b, type: 2}
     - target: {fileID: 8772251287208162193, guid: d031a506946b06d409f004193857ab86,
         type: 3}
       propertyPath: mainCamera
@@ -1274,7 +1279,7 @@ MonoBehaviour:
   aimState: {fileID: 3176073746653060377}
   bulletPrefab: {fileID: 2186950268952709522, guid: fca6996b55c6139458c502145a64fee6,
     type: 3}
-  rifleParticles: {fileID: 100006, guid: 7e9c50938e32351438a7df9ccad2f2a5, type: 3}
+  particles: {fileID: 100000, guid: 42b8fbe0fcd276a40a2863406ec4811d, type: 3}
   shootSpawn: {fileID: 5985110621780711499}
   rifleFireRate: 0.2
   pistolFireRate: 0.5

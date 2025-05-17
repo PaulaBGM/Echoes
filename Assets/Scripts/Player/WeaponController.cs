@@ -5,7 +5,7 @@ public class WeaponController : Weapon
 {
     [SerializeField] private AimStateManager aimState;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject rifleParticles;
+    [SerializeField] private GameObject particles;
     [SerializeField] private Transform shootSpawn;
     [SerializeField] private float rifleFireRate = 0.2f; // Tiempo base entre disparos
     [SerializeField] private float pistolFireRate = 0.5f; // La pistola tarda el doble
@@ -130,8 +130,8 @@ public class WeaponController : Weapon
     void InstantiateBullet()
     {
         Instantiate(bulletPrefab, shootSpawn.position, shootSpawn.rotation);
-        GameObject particles = Instantiate(rifleParticles, shootSpawn.position, shootSpawn.rotation);
-        Destroy(particles, 0.5f); // Ajusta el tiempo al que dure tu efecto
+        GameObject particlesGO = Instantiate(particles, shootSpawn.position, shootSpawn.rotation);
+        Destroy(particlesGO, 0.2f); // Ajusta el tiempo al que dure tu efecto
     }
 
     public void SetWeaponType(WeaponType weapon)

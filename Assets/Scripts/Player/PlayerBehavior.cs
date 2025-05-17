@@ -34,7 +34,7 @@ public class PlayerBehavior : BaseHealth, ITargeteable
 
         //ShootAnimation();
 
-        if (getWeapon.hasPistol)
+        if (getWeapon.hasPistol || getWeapon.hasLargeWeapon)
         {
             playerMove.canLongIddle = false;
             animator.SetBool("hasPistol", getWeapon.hasPistol);

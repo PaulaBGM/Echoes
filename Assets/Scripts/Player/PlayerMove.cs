@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     private CharacterController ch_Controller;
     private PlayerBehavior playerBehavior;
+    private GetWeapon getWeapon;
     private float gravity = -9.8f;
 
     [Header("Movement")]
@@ -80,12 +81,11 @@ public class PlayerMove : MonoBehaviour
     {
         ch_Controller = GetComponent<CharacterController>();
         playerBehavior = GetComponent<PlayerBehavior>();
+        getWeapon = GetComponent<GetWeapon>();
     }
 
     private  void Update()
     {
-        Debug.Log("CROUCH:" + isCrouched);
-
         if (playerBehavior.IsDead) return;
 
         if (isDashing)
@@ -108,7 +108,10 @@ public class PlayerMove : MonoBehaviour
         UpdateSlideVelocity();
         ApplyVelocity();
 
-        HandleCrouch();
+        if(!getWeapon.hasPistol || !getWeapon.hasLargeWeapon)
+        {
+            HandleCrouch();
+        }
 
         if (tryingToStand)
         {

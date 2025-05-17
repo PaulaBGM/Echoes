@@ -21,7 +21,7 @@ public class GetWeapon : MonoBehaviour
     private bool isNearWeapon = false;
     public bool hasPistol;
     private bool isSwitchingWeapon = false;
-    private bool hasLargeWeapon = false;
+    public bool hasLargeWeapon = false;
 
     private WeaponType currentWeaponType;
 
