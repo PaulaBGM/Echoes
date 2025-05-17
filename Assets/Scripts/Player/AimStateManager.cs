@@ -9,6 +9,7 @@ public class AimStateManager : MonoBehaviour
     public string xAxisInput = "Mouse X";
     public string yAxisInput = "Mouse Y";
     public Transform camFollowPos;
+    public bool robotFound = false;
 
     [Header("Smooth Settings")]
     [SerializeField] private float smoothSpeed = 10f;
@@ -44,7 +45,7 @@ public class AimStateManager : MonoBehaviour
     {
         if (playerBehavior == null || playerBehavior.IsDead) return;
 
-        if (Input.GetKeyDown(switchCameraKey))
+        if (Input.GetKeyDown(switchCameraKey) && robotFound)
         {
             ToggleCamera();
         }
