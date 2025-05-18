@@ -1280,6 +1280,7 @@ MonoBehaviour:
   fullCircleRifleSelect: {fileID: 4796296568127187701}
   middleCircleRifle: {fileID: 3383698350127330597}
   middleCirclePistol: {fileID: 8328016639272073966}
+  victoryMenu: {fileID: 4246681420860882727}
   sceneName: MainScene
 --- !u!1 &5153557354889057847
 GameObject:
@@ -1669,7 +1670,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Press F
 --- !u!1 &6632260490427977105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1991,7 +1992,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b80877e63eef23449bcf661e7b04ad4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa61bbc54ac67a640bf30b3cd2fed79e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3227,6 +3228,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1744814257433488583, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744814257433488583, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744814257433488583, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 3499718856901754074, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.8039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 3499718856901754074, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 3499718856901754074, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8039216
+      objectReference: {fileID: 0}
     - target: {fileID: 4578044157745057282, guid: 658d848840fcd7d408f57559cfd431e5,
         type: 3}
       propertyPath: m_Maskable
@@ -3247,10 +3278,35 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontStyle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5018401163956393737, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.8039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018401163956393737, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018401163956393737, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 5084492334271852781, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
     - target: {fileID: 6420374894136350855, guid: 658d848840fcd7d408f57559cfd431e5,
         type: 3}
       propertyPath: m_Name
       value: PlayerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898907098462090479, guid: 658d848840fcd7d408f57559cfd431e5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.21568628
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

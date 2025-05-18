@@ -11,6 +11,8 @@ TagManager:
   - TargetBack
   - Water
   - Ignea
+  - Drone
+  - Nyx
   layers:
   - Default
   - TransparentFX

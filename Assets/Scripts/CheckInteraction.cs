@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class CheckInteraction : MonoBehaviour
 {
     private bool playerInRange;
-    private bool interactionStarted;
+    public bool interactionStarted;
+    public GameObject dialogue;
 
     [SerializeField] private GameObject player;
     [SerializeField] private float waitTime;
@@ -17,8 +18,11 @@ public class CheckInteraction : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject playerHUD;
     [SerializeField] private Text dialogueText;
-
+    public UIController uicontroller;
+    public bool Nyx;
     private int dialogueIndex;
+    [SerializeField] Image sprite;
+    public Sprite spriteNyx;
 
     private void Start()
     {
@@ -88,6 +92,13 @@ public class CheckInteraction : MonoBehaviour
             interactionMark.SetActive(true);  // Muestra la marca de interacción
             player.GetComponent<PlayerBehavior>().isInDialogue = false;  // Termina el estado de diálogo
             Time.timeScale = 1f;  // Reactiva el tiempo del juego
+            Destroy(dialogue);
+
+            if (Nyx)
+            {
+                uicontroller.OpenVictoryMenu();
+            }
+            
         }
     }
 
@@ -98,6 +109,10 @@ public class CheckInteraction : MonoBehaviour
         {
             playerInRange = true;
             interactionMark.SetActive(true);
+            if (Nyx) 
+            {
+                sprite.sprite = spriteNyx;
+            }
         }
     }
 
@@ -108,6 +123,8 @@ public class CheckInteraction : MonoBehaviour
             playerInRange = false;
             interactionMark.SetActive(false);
             player.GetComponent<PlayerBehavior>().isInDialogue = false;
+
+            
         }
     }
 }

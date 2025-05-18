@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject fullCircleRifleSelect; //Por si solo se recoge este arma
     [SerializeField] private GameObject middleCircleRifle;
     [SerializeField] private GameObject middleCirclePistol;
+    [SerializeField] private GameObject victoryMenu;
 
     [SerializeField] private string sceneName;
 
@@ -37,6 +38,13 @@ public class UIController : MonoBehaviour
     private void OpenGameOverMenu()
     {
         StartCoroutine(ShowGameOverMenu());
+        Invoke("GoToMainMenu", 2f);
+    }
+
+    public void OpenVictoryMenu() 
+    {
+        StartCoroutine(ShowVictoryMenu());
+        Invoke("GoToMainMenu", 2f);
     }
 
     private IEnumerator ShowGameOverMenu()
@@ -46,15 +54,21 @@ public class UIController : MonoBehaviour
         playerHUD.SetActive(false);
         gameOverMenu.SetActive(true);
     }
-
+    private IEnumerator ShowVictoryMenu()
+    {
+        // Aquí se puede agregar un retraso o animación si es necesario
+        yield return new WaitForSeconds(2f); // Por ejemplo, 2 segundos
+        playerHUD.SetActive(false);
+        victoryMenu.SetActive(true);
+    }
     public void StartGame()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("MainScene");
     }
 
     public void GoToMainMenu()
     {
-        // Implementa la lógica para volver al menú principal
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()

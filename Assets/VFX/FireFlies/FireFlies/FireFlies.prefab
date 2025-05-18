@@ -3821,7 +3821,7 @@ ParticleSystem:
   LightsModule:
     enabled: 1
     ratio: 0.2
-    light: {fileID: 9125772698160531324, guid: cc5a2d21caa36b347b5fa11100effaf1, type: 3}
+    light: {fileID: 9125772698160531324, guid: 31fee1a5af00b67479f9bd07d02610ca, type: 3}
     randomDistribution: 1
     color: 0
     range: 0
@@ -3932,7 +3932,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    maxLights: 20
+    maxLights: 10
   TrailModule:
     enabled: 0
     mode: 0

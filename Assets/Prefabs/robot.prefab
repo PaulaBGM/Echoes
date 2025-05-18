@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7206555840568117579
 Transform:
   m_ObjectHideFlags: 0
@@ -86,37 +86,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.81
+      value: -9.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.429
+      value: 2.99
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -31.4
+      value: 52.62
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9948186
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.0034229972
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.035811555
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.09508834
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
@@ -126,12 +126,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 4.123
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -10.92
       objectReference: {fileID: 0}
     - target: {fileID: -7635826562936255635, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
@@ -143,6 +143,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: robot
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ece31f51f8a891e45bd64ff6770dc662,
+        type: 3}
+      propertyPath: m_TagString
+      value: Drone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -151,10 +156,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7206555840568117579}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ece31f51f8a891e45bd64ff6770dc662,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7727547067304876033}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ece31f51f8a891e45bd64ff6770dc662,
         type: 3}
       insertIndex: -1
@@ -172,30 +173,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 260414937415378905}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7727547067304876033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106838569702677128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb1299a0420045246a262ecad0feae82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  acceleration: 2
-  maxSpeed: 10
-  rotationSpeed: 2
-  smoothRotationTime: 0.1
-  mouseSensitivity: 2
-  maxVerticalAngle: 45
-  viewDistance: 15
-  viewAngle: 70
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!136 &8568278873479176572
 CapsuleCollider:
   m_ObjectHideFlags: 0

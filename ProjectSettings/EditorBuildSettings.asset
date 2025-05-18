@@ -8,5 +8,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pruebas.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 1f96d7a557baaf942860b33ad3bd3893
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 163a9f5b699054044a55525a61226f62
+  - enabled: 1
+    path: Assets/Scenes/Forest.unity
+    guid: 11c5d9906bd99af4e95a11015df5424b
+  - enabled: 1
+    path: Assets/Scenes/Desert.unity
+    guid: a1dc5d19ff1e84341ac75efcc4a50d47
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
