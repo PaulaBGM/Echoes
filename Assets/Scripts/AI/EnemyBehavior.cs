@@ -87,8 +87,14 @@ public class EnemyBehavior : BaseHealth
 
     private void UpdateWandering()
     {
+        
         if (!enemyVision.CheckVisionToPlayer())
         {
+            if (enemyVision == null) 
+            { 
+                return; 
+            }
+
             agent.speed = idleSpeed;
             currentWanderingTime += Time.deltaTime;
 

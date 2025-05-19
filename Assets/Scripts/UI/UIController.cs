@@ -44,7 +44,7 @@ public class UIController : MonoBehaviour
     public void OpenVictoryMenu() 
     {
         StartCoroutine(ShowVictoryMenu());
-        Invoke("GoToMainMenu", 2f);
+        
     }
 
     private IEnumerator ShowGameOverMenu()
@@ -57,9 +57,10 @@ public class UIController : MonoBehaviour
     private IEnumerator ShowVictoryMenu()
     {
         // Aquí se puede agregar un retraso o animación si es necesario
-        yield return new WaitForSeconds(2f); // Por ejemplo, 2 segundos
+        yield return new WaitForSeconds(1f); // Por ejemplo, 2 segundos
         playerHUD.SetActive(false);
         victoryMenu.SetActive(true);
+        Invoke("GoToMainMenu", 3f);
     }
     public void StartGame()
     {

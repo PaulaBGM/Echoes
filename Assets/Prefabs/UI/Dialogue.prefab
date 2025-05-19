@@ -290,6 +290,17 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontSize
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6565632384855397450, guid: 908ec124eaade6840a54ca55aae9dd06,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b47fd5057c1d6e40b579639ec852ec9,
+        type: 3}
+    - target: {fileID: 7062885793473327572, guid: 908ec124eaade6840a54ca55aae9dd06,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7366656897127110255, guid: 908ec124eaade6840a54ca55aae9dd06,
         type: 3}
       propertyPath: m_Pivot.x
@@ -456,7 +467,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7062885793473327572, guid: 908ec124eaade6840a54ca55aae9dd06, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 908ec124eaade6840a54ca55aae9dd06, type: 3}

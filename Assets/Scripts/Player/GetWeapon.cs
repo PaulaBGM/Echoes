@@ -7,7 +7,7 @@ public class GetWeapon : MonoBehaviour
     private PlayerBehavior playerBehavior;
     private WeaponController weaponController; // Para manejar las armas recogidas
     private Weapon nearbyWeapon; // Para detectar armas en el suelo
-
+   
     [SerializeField] private UIController uiController;
 
     [SerializeField] private float waitForAnim = 0.4f;
@@ -24,9 +24,11 @@ public class GetWeapon : MonoBehaviour
     public bool hasLargeWeapon = false;
 
     private WeaponType currentWeaponType;
+    [SerializeField] private GameObject buttonIcon;
 
     private void Start()
     {
+        buttonIcon.SetActive(false);
         playerBehavior = GetComponent<PlayerBehavior>();
         weaponController = GetComponentInChildren<WeaponController>(); // Maneja armas equipadas
 
@@ -166,7 +168,7 @@ public class GetWeapon : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<Weapon>(out Weapon weapon))
         {
-            Debug.Log("PRESIONA F para recoger el arma");
+            buttonIcon.SetActive(true);
             nearbyWeapon = weapon;
             isNearWeapon = true;
         }
@@ -176,6 +178,7 @@ public class GetWeapon : MonoBehaviour
     {
         if (other.gameObject == nearbyWeapon?.gameObject)
         {
+            buttonIcon.SetActive(false);
             isNearWeapon = false;
             nearbyWeapon = null;
         }
